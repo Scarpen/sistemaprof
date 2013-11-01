@@ -1,0 +1,24 @@
+<h2> ID do Usuario: <%= @aluno.id %> </h2>
+
+<div>
+<ul>
+	<li> Nome: <%= @aluno.nome %> </li>
+	<li> Email: <%= @aluno.email %> </li>
+    <li> Endereço: <%= @aluno.endereco %> </li>
+    <li> Telefone: <%= @aluno.telefone %> </li>
+    <li> Matricula: <%= @aluno.matricula %> </li>
+    <li> <%= image_tag(@aluno.avatar_url) if @aluno.avatar? %> </li>
+
+
+</ul>
+</div>
+
+	<%= link_to edit_aluno_path do %>
+    <button class="btn">Editar Autor</button>
+    <% end %>
+    <%= link_to @aluno, method: :delete, data: {confirm: 'Tem certeza?'} do %>
+    <button class="btn btn-danger">Apagar Autor</button>
+    <% end %>
+    <%= link_to alunos_path do%>
+    <button class="btn">Voltar</button>
+<% end %>

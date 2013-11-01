@@ -1,0 +1,50 @@
+<div align="center">
+<% if  @professor.errors.any? %>
+<div id="error_explanation">
+	<h2> Não foi possivel completar a ação. </h2>
+</div>
+<% end %>
+
+<%= form_for(@professor) do |f| %>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div>
+
+   <div>
+		<%= f.label :nome %>
+		<%= f.text_field :nome %>
+  </div>
+
+  <div>
+		<%= f.label :cpf %>
+		<%= f.text_field :cpf %>
+  </div>
+	  
+  <div><%= f.label :endereco %>
+  <%= f.text_field :endereco %></div>
+
+  <div><%= f.label :telefone %>
+  <%= f.text_field :telefone %></div>
+
+  <div>
+    <label>Foto</label>
+    <%= image_tag(@professor.avatar_url) if @professor.avatar? %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
+  
+  <div class="form-actions">
+  		<button type="submit" class="btn btn-primary">Salvar</button>
+  		<%= link_to professors_path do %>
+  		<button type="button" class="btn">Cancelar</button>
+  		<% end %>
+  </div>
+<% end %>
+
+</div>

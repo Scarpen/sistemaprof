@@ -1,0 +1,29 @@
+<h1> Listando Alunos </h1><br />
+<div align="center">
+<table border="1">
+  <tr>
+    <th width=30%>Matricula</th>
+    <th width=30>Nome</th>
+    <th width=30>Telefone</th>
+
+  </tr>
+
+<% @aluno.each do |t| %>
+  <tr>
+    <td><%= t.matricula%></td>
+    <td><%= t.nome%></td>
+    <td><%= t.telefone%></td>
+    <td width=7%><%= link_to 'Mostrar', t %></td>
+    <td width=7%><%= link_to 'Editar', edit_professor_path(t) %></td>
+    <td width=7%><%= link_to 'Apagar', t, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<div class="btn-group">
+  <%= link_to new_aluno_path do %>
+  <button class="btn">Novo Autor</button>
+  <% end %>
+</div>

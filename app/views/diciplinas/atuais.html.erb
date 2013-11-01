@@ -1,0 +1,30 @@
+<h1>Listando Minhas Disciplinas</h1>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Conteudo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% if current_user.type?("Aluno")  %>
+    <h3> Em desenvolvimento </h3>
+  <%end%>
+<% @diciplinas.each do |diciplina| %>
+  <% if current_user.type?("Professor")  %>
+    <% if diciplina.professor_id == current_user.id %>
+       <tr>
+        <td><%= diciplina.nome %></td>
+        <td><%= diciplina.conteudo %></td>
+        <td><%= link_to 'Show', diciplina %></td>
+        <td><%= link_to 'Edit', edit_diciplina_path(diciplina) %></td>
+        <td><%= link_to 'Destroy', diciplina, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <%end%>
+  <%end%>
+
+<% end %>
+</table>
+
+<br />
