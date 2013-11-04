@@ -7,6 +7,7 @@ Project::Application.routes.draw do
   devise_for :users
   resources :professors
   resources :alunos
+  resources :arquivos
   root to: "homes#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

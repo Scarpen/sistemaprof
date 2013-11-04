@@ -11,15 +11,22 @@
   </tr>
 
 <% @diciplinas.each do |diciplina| %>
-  <tr>
-    <td><%= diciplina.nome %></td>
-    <td><%= diciplina.conteudo %></td>
-    <td><%= diciplina.professor_id %></td>
-    <td><%= link_to 'Show', diciplina %></td>
-    <td><%= link_to 'Edit', edit_diciplina_path(diciplina) %></td>
-    <td><%= link_to 'Destroy', diciplina, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+      <% @professors.each do |p| %>
+        <% if p.id == diciplina.professor_id %>
+            <tr>
+              <td><%= diciplina.nome %></td>
+              <td><%= diciplina.conteudo %></td>
+              <td><%= p.nome %></td>
+              <td><%= link_to 'Mostrar', diciplina %></td>
+              <% if p.id = current_user.id %>
+              <td><%= link_to 'Editar', edit_diciplina_path(diciplina) %></td>
+              <td><%= link_to 'Apagar', diciplina, method: :delete, data: { confirm: 'Tem certeza? A diciplina não pode ser recuperada depois de apagada' } %>
+              <% end %>
+              </td>
+            </tr> 
+        <% end %>
+      <% end %>
+
 <% end %>
 </table>
 
-<br />

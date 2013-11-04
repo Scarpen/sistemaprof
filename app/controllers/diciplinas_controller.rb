@@ -4,7 +4,7 @@ class DiciplinasController < ApplicationController
   # GET /diciplinas.json
   def index
     @diciplinas = Diciplina.all
-
+    @professors = Professor.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @diciplinas }
@@ -19,6 +19,12 @@ class DiciplinasController < ApplicationController
   # GET /diciplinas/1.json
   def show
     @diciplina = Diciplina.find(params[:id])
+    @professors = Professor.all
+    @professors.each do |p|
+      if p.id == @diciplina.professor_id
+        @professor = p
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,7 +52,7 @@ class DiciplinasController < ApplicationController
   # POST /diciplinas.json
   def create
     @diciplina = Diciplina.new(params[:diciplina])
-
+    @diciplina.professor_id = current_user.id
     respond_to do |format|
       if @diciplina.save
         format.html { redirect_to @diciplina, notice: 'Diciplina was successfully created.' }

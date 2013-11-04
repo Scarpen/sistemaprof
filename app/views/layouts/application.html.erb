@@ -49,7 +49,6 @@
           <a class="brand" href="#">Project</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Cadastre-se", new_aluno_path %></li>
               <% if current_user %>
               <% if current_user.type?("Admin") %>
               <li><%= link_to "Cadastrar Professor", new_professor_path %></li>
@@ -58,13 +57,16 @@
               <% if current_user.type?("Professor") %>
               <li><%= link_to "Diciplinas", diciplinas_path %></li>
               <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
-              <li><%= link_to "Nova Diciplina", new_professor_path %></li>
+              <li><%= link_to "Nova Diciplina", new_diciplina_path %></li>
               <% end %>
                <% if current_user.type?("Aluno") %>
               <li><%= link_to "Diciplinas", diciplinas_path %></li>
               <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
               <% end %>
+              <% else %>
+              <li><%= link_to "Cadastre-se", new_aluno_path %></li>
               <%end%>
+
 
 
             </ul>

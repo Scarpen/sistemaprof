@@ -1,0 +1,15 @@
+<h1>Novo Arquivo</h1>
+<%= form_for(@arquivo) do |f| %>
+  <div>
+    	 <%= f.file_field :arquivo %>
+    	 <%= f.hidden_field :arquivo_cache %>
+  </div>
+  <div>
+		<%= f.label :dicipĺina_id %>
+		<%= f.select :diciplina_id, @diciplinas.collect { |a| [a.nome,a.id] } %>
+  </div>
+    <div class="actions">
+    <%= f.submit %>
+  </div>
+<%end%>
+<%= link_to 'Back', diciplinas_path %>

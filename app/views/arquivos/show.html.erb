@@ -1,0 +1,13 @@
+<h2> ID do Usuario: <%= @arquivo.id %> </h2>
+
+<div>
+<ul>
+    <li> <%= @arquivo.arquivo_url if @arquivo.arquivo? %> </li>
+
+</ul>
+</div>
+
+
+    <%= link_to @arquivo, method: :delete, data: {confirm: 'Tem certeza?'} do %>
+    <button class="btn btn-danger">Apagar Autor</button>
+    <% end %>
