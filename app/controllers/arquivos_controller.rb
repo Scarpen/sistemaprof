@@ -21,10 +21,20 @@ class ArquivosController < ApplicationController
 	end
 	def destroy
 		@arquivo = Arquivo.find(params[:id])
+		id = @arquivo.diciplina_id
 		if @arquivo.destroy
-			redirect_to @arquivo, :notice => 'Cadastro apagado'
+			redirect_to action: 'show', controller: 'diciplinas', id: id
 		else
-			render :index
 		end
 	end
+	def download
+		@arquivo = Arquivo.find(params[:meuar])
+		urlcomplete = "#{Rails.root}/public" << @arquivo.arquivo.url
+		send_file urlcomplete
+	end
+
+	def index
+	@arquivo = Arquivo.all
+  	end
+
 end

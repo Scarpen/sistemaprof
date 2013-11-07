@@ -2,11 +2,10 @@
 
 <div>
 <ul>
-    <li> <%= @arquivo.arquivo_url if @arquivo.arquivo? %> </li>
-
+    <li> <%= link_to @arquivo.arquivo.url if @arquivo.arquivo? %> </li>
 </ul>
 </div>
-
+<%= link_to 'TEST', :action => 'download', :controller => 'arquivos', :meuar => @arquivo%>
 
     <%= link_to @arquivo, method: :delete, data: {confirm: 'Tem certeza?'} do %>
     <button class="btn btn-danger">Apagar Autor</button>

@@ -20,15 +20,12 @@ class DiciplinasController < ApplicationController
   def show
     @diciplina = Diciplina.find(params[:id])
     @professors = Professor.all
-    @professors.each do |p|
-      if p.id == @diciplina.professor_id
-        @professor = p
+    @professor = Professor.find(@diciplina.professor_id)
+    @arquivos = []
+    Arquivo.all.each do |a|
+      if a.diciplina_id == @diciplina.id
+        @arquivos << a
       end
-    end
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @diciplina }
     end
   end
 
@@ -91,4 +88,22 @@ class DiciplinasController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def aceitar
+    @diciplina = Diciplina.find(params[:diciplina])
+    aluno = Aluno.find(params[:aluno])
+    disciplina = @diciplina.id
+    @diciplina.aceitar(aluno, disciplina)
+    redirect_to action: 'show', controller: 'diciplinas', id: disciplina
+  end
+
+  def recusar
+    @diciplina = Diciplina.find(params[:diciplina])
+    aluno = Aluno.find(params[:aluno])
+    disciplina = @diciplina.id
+    @diciplina.recusar(aluno, disciplina)
+    redirect_to action: 'show', controller: 'diciplinas', id: disciplina
+  end
+
+
 end

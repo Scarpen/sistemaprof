@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  aluno_id: 1
+  diciplina_id: 1
+  situacao: 1
+
+two:
+  aluno_id: 1
+  diciplina_id: 1
+  situacao: 1

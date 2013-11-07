@@ -1,6 +1,6 @@
 <h1>Listando Diciplinas</h1>
 
-<table>
+<table >
   <tr>
     <th>Nome</th>
     <th>Conteudo</th>
@@ -18,7 +18,7 @@
               <td><%= diciplina.conteudo %></td>
               <td><%= p.nome %></td>
               <td><%= link_to 'Mostrar', diciplina %></td>
-              <% if p.id = current_user.id %>
+              <% if diciplina.professor?(current_user) %>
               <td><%= link_to 'Editar', edit_diciplina_path(diciplina) %></td>
               <td><%= link_to 'Apagar', diciplina, method: :delete, data: { confirm: 'Tem certeza? A diciplina não pode ser recuperada depois de apagada' } %>
               <% end %>

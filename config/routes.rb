@@ -2,12 +2,23 @@ Project::Application.routes.draw do
   resources :diciplinas do
     collection do
       get 'atuais'
-    end
+      get 'aceitar'
+      get 'recusar'
+      end
   end
   devise_for :users
   resources :professors
   resources :alunos
-  resources :arquivos
+  resources :arquivos do
+    collection do
+      get 'download'
+    end
+  end
+  resources :controles do
+    collection do
+      get 'cadastro'
+    end
+  end
   root to: "homes#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

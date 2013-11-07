@@ -8,7 +8,7 @@ class Ability
         elsif user.type?("Professor")
         	can :manage, [Diciplina]
         elsif user.type?("Aluno")
-        	can [:index, :read, :atuais], [Diciplina]
+        	can [:index, :read, :atuais, :recusar], [Diciplina]
         end
     end
 end

@@ -23,4 +23,15 @@ class User < ActiveRecord::Base
     def tipo
       return type
     end
+
+    def diciplinasAlunos
+      diciplinas = []
+      Controle.all.each do |c|
+          if c.aluno_id == id
+            diciplinas << c
+          end
+      end
+      return diciplinas
+    end
+
 end
