@@ -1,29 +1,33 @@
 <%= form_for(@diciplina) do |f| %>
+  
   <% if @diciplina.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@diciplina.errors.count, "error") %> prohibited this diciplina from being saved:</h2>
-
       <ul>
-      <% @diciplina.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @diciplina.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
     <%= f.label :nome %><br />
     <%= f.text_field :nome %>
   </div>
+
   <div class="field">
     <%= f.label :conteudo %><br />
     <%= f.text_area :conteudo %>
   </div>
+
   <div class="field">
     <%= f.label :professor_id %><br />
     <%= f.text_field :professor_id, disabled: true, placeholder: current_user.nome %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>

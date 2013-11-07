@@ -10,8 +10,5 @@ class ControlesController < ApplicationController
 		@controle.situacao = 1
 		@controle.save
 		redirect_to action: 'index', controller: 'diciplinas'
-	
 	end
-
-	
 end

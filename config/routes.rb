@@ -4,8 +4,15 @@ Project::Application.routes.draw do
       get 'atuais'
       get 'aceitar'
       get 'recusar'
+      # get 'alunospendentes'
+      # get 'alunosinscritos'
+      # get 'materiais'
+
       end
   end
+  match 'diciplinas/:id/alunospendentes' => 'diciplinas#alunospendentes', :as => :alunospendentes
+  match 'diciplinas/:id/alunosinscritos' => 'diciplinas#alunosinscritos', :as => :alunosinscritos
+  match 'diciplinas/:id/materiais' => 'diciplinas#materiais', :as => :materiais
   devise_for :users
   resources :professors
   resources :alunos

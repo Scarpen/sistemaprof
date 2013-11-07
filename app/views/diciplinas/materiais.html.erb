@@ -1,0 +1,25 @@
+<div>
+
+	<%= render 'links' %>
+	<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
+		<table width="50%" border=1 align="center">
+		<tr >
+			<th colspan=3> Materiais </th>
+		</tr>
+		<% @arquivos.each do |a| %>
+			<tr align="center">
+				<td align="left"> <%= a.nome %> </td>
+				<td width=13%> <%= link_to 'Download', :action => 'download', :controller => 'arquivos', :meuar => a %></td>
+			<% if @diciplina.professor?(current_user) %>
+				<td width=13%><%= link_to 'Apagar', a, method: :delete, data: {confirm: 'Tem certeza?'} %> </td>
+			<% end %>
+			</tr>
+		<% end %>
+		</table>
+		<% if @diciplina.professor?(current_user) %>
+			<%= link_to 'Enviar Material', new_arquivo_path %>
+		<% end %>
+		<% else %>
+		Você não tem acesso à esse material. </p>
+	<% end %>
+</div>

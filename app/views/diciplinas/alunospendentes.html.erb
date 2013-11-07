@@ -1,0 +1,22 @@
+<%= render 'links' %>
+<div>
+	<% if @diciplina.professor?(current_user) %>
+		<table border=1 align="center" width=50%>
+			<tr> 
+				<th colspan=4> Alunos Pendentes </th>
+			</tr>
+			<% @diciplina.pendentes.each do |a| %>
+				<tr align="center">
+					<td align="left"> <%= a.nome %> </td>
+					<td width=13%> <%= link_to 'Mostrar', action: 'show', controller: 'alunos', id: a.id %> </td>
+					<td width=13%> <%= link_to 'Aceitar',  :action => 'aceitar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id %> </td>
+					<td width=13%> <%= link_to 'Recusar',  :action => 'recusar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id %> </td>
+			<% end %>
+			<% if @diciplina.pendentes == [] %>
+				<tr> 
+					<td> Não há alunos pendentes no momento. </td> 
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+</div>

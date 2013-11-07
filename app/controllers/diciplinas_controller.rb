@@ -21,6 +21,11 @@ class DiciplinasController < ApplicationController
     @diciplina = Diciplina.find(params[:id])
     @professors = Professor.all
     @professor = Professor.find(@diciplina.professor_id)
+   
+  end
+
+  def materiais
+    @diciplina = Diciplina.find(params[:id])
     @arquivos = []
     Arquivo.all.each do |a|
       if a.diciplina_id == @diciplina.id
@@ -104,6 +109,4 @@ class DiciplinasController < ApplicationController
     @diciplina.recusar(aluno, disciplina)
     redirect_to action: 'show', controller: 'diciplinas', id: disciplina
   end
-
-
 end

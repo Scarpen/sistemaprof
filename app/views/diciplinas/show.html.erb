@@ -1,103 +1,33 @@
 <p id="notice"><%= notice %></p>
-
+<%= render 'links' %>
 <h3>
-  <b>Nome:</b>
-  <%= @diciplina.nome %>
+	<b>Nome:</b>
+	<%= @diciplina.nome %>
 </h3>
 
 <p>
-  <b>Conteudo:</b>
-  <%= @diciplina.conteudo %>
+		<b>Conteudo:</b>
+		<%= @diciplina.conteudo %>
 </p>
 
 <p>
-  <b>Professor:</b>
-  <%= @professor.nome %>
+		<b>Professor:</b>
+		<%= @professor.nome %>
 </p>
 
 <div> 
 	<% if current_user.type?("Aluno")%>
-	<p> <b> Situação: </b>
-	
-	<% if @diciplina.situacao(current_user) == 0 %>
-	Você não está cadastrado nessa disciplina, <%= link_to 'Cadastrar', :action => 'cadastro', :controller => 'controles', :user => current_user, :disciplina => @diciplina %> 
-	<% elsif @diciplina.situacao(current_user) == 1 %>
-	Aguardando aprovação do professor responsavel.
-	<% elsif @diciplina.situacao(current_user) == 2 %>
-	Você já está cadastrado nessa disciplina. <%= link_to 'Sair',  :action => 'recusar', :controller => 'diciplinas', :aluno => current_user.id,         :diciplina => @diciplina.id %>
-	<% end %>
-	</p>
+		<b> Situação: </b>
+		<% if @diciplina.situacao(current_user) == 0 %>
+			Você não está cadastrado nessa disciplina, <%= link_to 'Cadastrar', :action => 'cadastro', :controller => 'controles', :user => current_user, :disciplina => @diciplina %> 
+		<% elsif @diciplina.situacao(current_user) == 1 %>
+			Aguardando aprovação do professor responsavel.
+		<% elsif @diciplina.situacao(current_user) == 2 %>
+			Você já está cadastrado nessa disciplina. <%= link_to 'Sair',  :action => 'recusar', :controller => 'diciplinas', :aluno => current_user.id,         :diciplina => @diciplina.id %>
+		<% end %>
 	<%end%>
 </div>
-<div>
-<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
-<table width="50%" border=1 align="center">
-	<tr >
-	<th colspan=3> Materiais </th>
-</tr>
-<% @arquivos.each do |a| %>
-	<tr align="center">
-		<td align="left"> <%= a.nome %> </td>
-		<td width=13%> <%= link_to 'Download', :action => 'download', :controller => 'arquivos', :meuar => a %></td>
-		<% if @diciplina.professor?(current_user) %>
-			<td width=13%><%= link_to 'Apagar', a, method: :delete, data: {confirm: 'Tem certeza?'} %> </td>
-		<% end %>
-	</tr>
-<% end %>
-</table>
-<% if @diciplina.professor?(current_user) %>
-	<%= link_to 'Enviar Material', new_arquivo_path %>
-<% end %>
-<% else %>
-Você não tem acesso à esse material. </p>
-<% end %>
-<br>
-<% if @diciplina.professor?(current_user) %>
-	<table border=1 align="center" width=50%>
-	<tr> 
-		<th colspan=4> Alunos Pendentes </th>
-	</tr>
-	<% @diciplina.pendentes.each do |a| %>
-	<tr align="center">
-		<td align="left"> <%= a.nome %> </td>
-		<td width=13%> <%= link_to 'Mostrar', action: 'show', controller: 'alunos', id: a.id %> </td>
-		<td width=13%> <%= link_to 'Aceitar',  :action => 'aceitar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id %> </td>
-		<td width=13%> <%= link_to 'Recusar',  :action => 'recusar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id %> </td>
-	<% end %>
-	<% if @diciplina.pendentes == [] %>
-	<tr> 
-		<td> Não há alunos pendentes no momento. </td> 
-	</tr>
-	<% end %>
-	<% end %>
-	</table>
-<br>
-<% if @diciplina.professor?(current_user) %>
-	
-	<table border=1 align="center" width=50%>
-		<tr>
-			<th colspan=3> Alunos Inscritos </th>
-		</tr>
-	<% @diciplina.inscritos.each do |a| %>
-		<tr align="center">
-			<td align="left"> <%= a.nome %> </td>
-			<td width=13%> <%= link_to 'Mostrar', action: 'show', controller: 'alunos', id: a.id %> </td>
-			<td width=13%> <%= link_to 'Desagregar',  :action => 'recusar', :controller => 'diciplinas', :aluno => a.id, :diciplina => @diciplina.id %> </td>
-		</tr>
-	<% end %>
-	<% if @diciplina.inscritos == [] %>
-	<tr> 
-		<td> Não há alunos inscritos nessa diciplina. </td> 
-	</tr>
-	<% end %>
-	</table>
-	<br>
-	<div align="center">
-	<%= link_to 'Editar', edit_diciplina_path(@diciplina) %> |
 
-<%end%>
-	<%= link_to 'Voltar', diciplinas_path %>
-	</div>
-<br>
 
-</div>
+<br>
+<%= link_to 'Voltar', diciplinas_path %>
