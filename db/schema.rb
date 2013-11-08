@@ -22,10 +22,10 @@ ActiveRecord::Schema.define(:version => 20131105140322) do
   create_table "arquivos", :force => true do |t|
     t.integer  "diciplina_id"
     t.string   "arquivo"
+    t.string   "nome"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "avatar"
-    t.string   "nome"
   end
 
   create_table "controles", :force => true do |t|
