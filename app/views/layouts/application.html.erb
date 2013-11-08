@@ -74,17 +74,18 @@
 
 
             </ul>
-            <div align="right">
+            <div align="right" class="image">
             <p>
               <% if current_user %>
-                <% if current_user.type?("Professor") %>
-                  <!-- <%= image_tag(current_user.avatar_url) if current_user.avatar? %> -->
-                <% end %>
-                <% if current_user.type?("Aluno") %>
-                  <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
-                <% end %>
-                Atualmente logado como: <br> <%= current_user.email %>
-                <%= link_to('Logout', destroy_user_session_path, method: 'delete') %>
+              Atualmente logado como: <br> 
+              <% if current_user.type?("Professor") %>
+              <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
+              <% end %>
+               <% if current_user.type?("Aluno") %>
+               <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
+              <% end %>
+                <%= current_user.email %>
+               <%= link_to('Logout', destroy_user_session_path, method: 'delete') %>
               <% else %>
                 Você ainda não esta logado.<br>
                 Faça o login <%= link_to "aqui", new_user_session_path  %>
