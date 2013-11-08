@@ -11,6 +11,15 @@ class DiciplinasController < ApplicationController
     end
   end
 
+  def createpasta
+    print 'adsads'
+    @diciplina = Diciplina.find(params[:id])
+    @pasta = Pasta.new(params[:nome])
+    @pasta.diciplina_id = @diciplina.id
+    @pasta.save
+    redirect_to action: 'materiais', controller: 'diciplinas', id: @diciplina.id
+  end
+
   def atuais
     @diciplinas = Diciplina.all
   end
@@ -26,10 +35,10 @@ class DiciplinasController < ApplicationController
 
   def materiais
     @diciplina = Diciplina.find(params[:id])
-    @arquivos = []
-    Arquivo.all.each do |a|
+    @pastas = []
+    Pasta.order(params[:nome]).each do |a|
       if a.diciplina_id == @diciplina.id
-        @arquivos << a
+        @pastas << a
       end
     end
   end

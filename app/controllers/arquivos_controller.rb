@@ -21,12 +21,15 @@ class ArquivosController < ApplicationController
 	end
 	def destroy
 		@arquivo = Arquivo.find(params[:id])
-		id = @arquivo.diciplina_id
+		id = @arquivo.pasta_id
 		if @arquivo.destroy
 			redirect_to action: 'show', controller: 'diciplinas', id: id
 		else
 		end
 	end
+
+
+
 	def download
 		@arquivo = Arquivo.find(params[:meuar])
 		urlcomplete = "#{Rails.root}/public" << @arquivo.arquivo.url

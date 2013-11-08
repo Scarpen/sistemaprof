@@ -4,6 +4,7 @@ Project::Application.routes.draw do
       get 'atuais'
       get 'aceitar'
       get 'recusar'
+      get 'createpasta'
       # get 'alunospendentes'
       # get 'alunosinscritos'
       # get 'materiais'
@@ -16,6 +17,7 @@ Project::Application.routes.draw do
   devise_for :users
   resources :professors
   resources :alunos
+  resources :pasta
   resources :arquivos do
     collection do
       get 'download'
