@@ -4,7 +4,7 @@ Project::Application.routes.draw do
       get 'atuais'
       get 'aceitar'
       get 'recusar'
-      get 'createpasta'
+      # post 'createpasta'
       # get 'alunospendentes'
       # get 'alunosinscritos'
       # get 'materiais'
@@ -14,6 +14,8 @@ Project::Application.routes.draw do
   match 'diciplinas/:id/alunospendentes' => 'diciplinas#alunospendentes', :as => :alunospendentes
   match 'diciplinas/:id/alunosinscritos' => 'diciplinas#alunosinscritos', :as => :alunosinscritos
   match 'diciplinas/:id/materiais' => 'diciplinas#materiais', :as => :materiais
+  match 'diciplinas/:id/createpasta' => 'diciplinas#createpasta', :as => :createpasta, via: :post
+  match 'diciplinas/:id/createarquivo' => 'diciplinas#createarquivo', :as => :createarquivo, via: :post
   devise_for :users
   resources :professors
   resources :alunos

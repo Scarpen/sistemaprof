@@ -12,11 +12,19 @@ class DiciplinasController < ApplicationController
   end
 
   def createpasta
-    print 'adsads'
     @diciplina = Diciplina.find(params[:id])
-    @pasta = Pasta.new(params[:nome])
+    @pasta = Pasta.new(:nome => params[:nome])
     @pasta.diciplina_id = @diciplina.id
     @pasta.save
+    redirect_to action: 'materiais', controller: 'diciplinas', id: @diciplina.id
+  end
+
+  def createarquivo
+    @pasta = Pasta.find(params[:pasta_id])
+    @arquivo = Arquivo.new(:nome => params[:nome], :arquivo => params[:arquivo], 
+      :pasta_id => params[:pasta_id], :arquivo_cache => params[:arquivo_cache])
+    @pasta.diciplina_id = @diciplina.id
+    @arquivo.save
     redirect_to action: 'materiais', controller: 'diciplinas', id: @diciplina.id
   end
 

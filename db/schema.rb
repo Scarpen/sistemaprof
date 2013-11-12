@@ -13,19 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20131108143647) do
 
-  create_table "alunos_diciplinas", :id => false, :force => true do |t|
-    t.integer "aluno_id"
-    t.integer "diciplina_id"
-    t.integer "situacao"
-  end
-
   create_table "arquivos", :force => true do |t|
-    t.integer  "diciplina_id"
+    t.integer  "pasta_id"
     t.string   "arquivo"
     t.string   "nome"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "avatar"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "controles", :force => true do |t|
@@ -44,24 +37,7 @@ ActiveRecord::Schema.define(:version => 20131108143647) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "files", :id => false, :force => true do |t|
-    t.string  "file"
-    t.integer "diciplina_id"
-  end
-
-  create_table "homes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "pasta", :force => true do |t|
-    t.string   "nome"
-    t.integer  "diciplina_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  create_table "pastas", :force => true do |t|
     t.string   "nome"
     t.integer  "diciplina_id"
     t.datetime "created_at",   :null => false

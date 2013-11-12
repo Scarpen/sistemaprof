@@ -1,0 +1,25 @@
+<div class="modal fade" id="pasta<%= pasta.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> "Enviar novo arquivo para a pasta: <%= pasta.nome %>  </h4>
+      </div>
+      <div class="well">
+        <%= form_tag(createarquivo_path) do %>
+
+                            <%= label_tag :nome %>
+                            <%= text_field_tag :nome %>
+
+                            <%= file_field_tag :arquivo %>
+                            <%= hidden_field_tag :arquivo_cache %>
+
+                            <%= hidden_field_tag(:pasta_id, pasta.id) %>
+
+                            <%= submit_tag 'Enviar' %>
+        <% end %>
+        </div>
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

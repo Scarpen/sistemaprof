@@ -22,8 +22,10 @@ class ArquivosController < ApplicationController
 	def destroy
 		@arquivo = Arquivo.find(params[:id])
 		id = @arquivo.pasta_id
+		pasta = Pasta.find(id)
+		id = pasta.diciplina_id
 		if @arquivo.destroy
-			redirect_to action: 'show', controller: 'diciplinas', id: id
+			redirect_to action: 'materiais', controller: 'diciplinas', id: id
 		else
 		end
 	end
@@ -36,8 +38,5 @@ class ArquivosController < ApplicationController
 		send_file urlcomplete
 	end
 
-	def index
-	@arquivo = Arquivo.all
-  	end
 
 end
