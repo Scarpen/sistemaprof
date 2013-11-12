@@ -6,17 +6,18 @@
 	<h1> Alunos Pendentes </h1>
 	<div class="row-fluid">
 		<% @diciplina.pendentes.each do |a| %>
-			<div class="span4">
+			<div class="span2">
 				<div class="row">
 				  <div class="col-sm-6 col-md-4">
 				    <div class="thumbnail">
-				      
+				       <h3><%= link_to a.nome, aluno_path(a)%></h3>
 				      <div class="caption">
-				        <h3><%=a.nome%></h3>
+				       <p>Matricula:<%= a.matricula %></p>
 				        <%= image_tag a.avatar_url %> 
-					    <%= link_to 'Mostrar', action: 'show', controller: 'alunos', id: a.id, :class => 'btn btn-primary btn-small' %>
-						<%= link_to 'Aceitar',  :action => 'aceitar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id %>
-						<%= link_to 'Recusar',  :action => 'recusar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id, :class => 'btn btn-primary btn-small'%>
+				        <ul>
+							<%= link_to 'Aceitar',  {:action => 'aceitar', :controller => 'diciplinas', :aluno => a.id,:diciplina => @diciplina.id} , :class => 'btn btn-success btn-small' %>
+							<%= link_to 'Recusar',  {:action => 'recusar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id}, :class => 'btn btn-danger btn-small'%>
+						</ul>
 							 
 				      </div>
 				    </div>
