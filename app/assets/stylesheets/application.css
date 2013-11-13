@@ -32,13 +32,8 @@
 	color: #ffffff;
 	margin-right: 10px;
 }
-.image a{
-	text-shadow: 0px 0px 0px #000000;
-    filter: dropshadow(color=#000000, offx=0, offy=0);
-	color: rgb(169,3,41);
-}
-.image a:hover{
-	color: rgb(130,1,30);
+.image td img{
+	margin-top: 5px;
 }
 
 li{

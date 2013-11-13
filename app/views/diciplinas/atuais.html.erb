@@ -1,25 +1,38 @@
-<h1>Listando Minhas Disciplinas</h1>
+<div class="page-header">
+  <h1> Listando Minhas Disciplinas </h1>
+</div>
 
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Conteudo</th>
-    <% if current_user.type?("Aluno")  %>
+<table class="table table-striped">
+<thead>
+  <% if current_user.type?("Aluno")  %>
+      <th>Professor</th>
+      <th>Conteudo</th>
       <th>Professor</th>
       <th>Situação</th>
-      </tr>
+      <th>Ação</th>
+  <% elsif current_user.type?("Professor") %>
+    <tr>
+      <th>Nome</th>
+      <th>Conteudo</th>
+      <th>Ações<th>
+    </tr>
+  <%end%>
+  </thead> 
+
+<tbody>
+    <% if current_user.type?("Aluno")  %>
       <% current_user.diciplinasAlunos.each do |c| %>
         <tr>
           <% diciplina = Diciplina.find(c.diciplina_id) %>
-          <td> <%= diciplina.nome %> </td>
-          <td> <%= diciplina.conteudo %> </td>
-          <td> <%= Professor.find(diciplina.professor_id).nome %> </td>
+            <td> <%= diciplina.nome %> </td>
+            <td> <%= diciplina.conteudo %> </td>
+            <td> <%= Professor.find(diciplina.professor_id).nome %> </td>
           <%if c.situacao == 1 %>
             <td> Aguardando aprovação do Professor </td> 
           <%elsif c.situacao == 2 %>
             <td> Inscrição Completa </td> 
           <% end %>
-        <td><%= link_to 'Mostrar', diciplina %></td>
+          <td><%= link_to 'Mostrar', diciplina,:class => 'btn btn-mini btn-default' %></td>
         </tr>
       <% end %>
     <%end%>
@@ -30,11 +43,13 @@
         <tr>
           <td><%= diciplina.nome %></td>
           <td><%= diciplina.conteudo %></td>
-          <td><%= link_to 'Mostrar', diciplina %></td>
-          <td><%= link_to 'Editar', edit_diciplina_path(diciplina) %></td>
-          <td><%= link_to 'Apagar', diciplina, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Mostrar', diciplina,:class => 'btn btn-mini btn-default' %>
+          <%= link_to 'Editar', edit_diciplina_path(diciplina),:class =>'btn btn-mini btn-primary' %>
+          <%= link_to 'Apagar', diciplina, method: :delete, data: { confirm: 'Are you sure?' },:class =>'btn btn-mini btn-danger' %></td>
         </tr>
       <%end%>
     <%end%>
   <% end %>
+</tbody>
+
 </table>
