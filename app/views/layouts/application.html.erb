@@ -60,7 +60,6 @@
               <li><%= link_to "Diciplinas", diciplinas_path %></li>
               <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
               <li><%= link_to "Nova Diciplina", new_diciplina_path %></li>
-              <li><%= link_to 'Enviar Material', new_arquivo_path %></li>
               <li><%= link_to 'Todos os Alunos', alunos_path %></li>
               <% end %>
                <% if current_user.type?("Aluno") %>

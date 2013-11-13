@@ -19,14 +19,7 @@ class DiciplinasController < ApplicationController
     redirect_to action: 'materiais', controller: 'diciplinas', id: @diciplina.id
   end
 
-  def createarquivo
-    @pasta = Pasta.find(params[:pasta_id])
-    @arquivo = Arquivo.new(:nome => params[:nome], :arquivo => params[:arquivo], 
-      :pasta_id => params[:pasta_id], :arquivo_cache => params[:arquivo_cache])
-    @pasta.diciplina_id = @diciplina.id
-    @arquivo.save
-    redirect_to action: 'materiais', controller: 'diciplinas', id: @diciplina.id
-  end
+
 
   def atuais
     @diciplinas = Diciplina.all
@@ -43,6 +36,7 @@ class DiciplinasController < ApplicationController
 
   def materiais
     @diciplina = Diciplina.find(params[:id])
+    @arquivo = Arquivo.new
     @pastas = []
     Pasta.order(params[:nome]).each do |a|
       if a.diciplina_id == @diciplina.id

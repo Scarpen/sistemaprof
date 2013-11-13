@@ -5,17 +5,21 @@
         <h4 class="modal-title"> "Enviar novo arquivo para a pasta: <%= pasta.nome %>  </h4>
       </div>
       <div class="well">
-        <%= form_tag(createarquivo_path) do %>
+        <%= form_for(@arquivo) do |f| %>
 
-                            <%= label_tag :nome %>
-                            <%= text_field_tag :nome %>
+          <%= f.label :nome %>
+          <%= f.text_field :nome %>
 
-                            <%= file_field_tag :arquivo %>
-                            <%= hidden_field_tag :arquivo_cache %>
+          <%= f.file_field :arquivo %>
+          <%= f.hidden_field :arquivo_cache %>
 
-                            <%= hidden_field_tag(:pasta_id, pasta.id) %>
+          <%= f.label :pasta_id %><br />
+          <%= f.text_field :pasta_id, disabled: true, placeholder: pasta.nome %>
 
-                            <%= submit_tag 'Enviar' %>
+          <%= f.hidden_field :pasta_id, {:value => pasta.id} %>
+
+          <%= f.submit 'Enviar' %>
+
         <% end %>
         </div>
        
