@@ -1,5 +1,6 @@
 <div>
 	<%= render 'links' %>
+	<div class="tab-pane active" id="tab1">
 	<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
 
 
@@ -47,6 +48,7 @@
 	<% else %>
 		Você não tem acesso à esse material. </p>
 	<% end %>
+</div>
 </div>
 <script>
 $(document).ready(function () {
