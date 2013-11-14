@@ -3,35 +3,39 @@
 <div>
 
 	<%= render 'links' %>
+
+	<br>
 	<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
+
 
 		<% if @diciplina.professor?(current_user) %>
 			<div class="field">
 				<%= form_tag(createpasta_path) do %>
-					Criar nova pasta:
+					<p>Criar nova pasta:
     				<% label_tag :nome %>
     				<%= text_field_tag :nome %>
     				
-   					<%= submit_tag 'Criar' %>
+   					<%= submit_tag 'Criar' %></p>
    				<%end%>
   			</div>
 		<% end %>
 
 		<ul class="nav nav-list">
-			<% @pastas.each do |p| %>		
+			<% @diciplina.pastas.order('lower(nome)').each do |p| %>
 			    <li>
 			    	 <legend class="tree-toggler title-header"> <%= p.nome%> </legend>
+			    	  <p align =right><%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' } %></p>
+
 			    	  	<ul class="nav nav-list tree">
 			               		<li>
-			               			<%= link_to nil, data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %>
-   										<button class="btn btn-primary"> Enviar novo arquivo</button>
+			               			<p><%= link_to nil, data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
+   										<button class="btn enviar"> Enviar novo arquivo </button>
 									<% end %> 
-									<%= render :partial => "arquivo_pastas", :locals => {:pasta => p }%>
 								</li>
-								
 			               		<% p.arquivos.each do |a|%>
-			                      	<li class="fake-level">
-			                               <a href="#" > <%= a.nome %> </a>
+			                      	<li>
+			                               <p><%= link_to a.nome, :action => 'download', :controller => 'arquivos', :meuar => a %>
+			                               <%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' } %></p>
 			                        </li> 
 			                    <% end %>   
 			            </ul>
@@ -39,19 +43,24 @@
 			   <br>
 			<% end %>
 		</ul>
+	<% @diciplina.pastas.order('lower(nome)').each do |p| %>
+			<div>		
+			    <%= render :partial => "arquivo_pastas", :locals => {:pasta => p }%>
+			    </div>
+		<% end %> 
 
 	<% else %>
 		Você não tem acesso à esse material. </p>
 	<% end %>
 </div>
-
-
-
 <script>
 $(document).ready(function () {
 	$('ul.tree').hide();
     $('legend.tree-toggler').click(function () {
         $(this).parent().children('ul.tree').toggle(500);
+    });
+    $('.enviar').click(function (){
+    	$('.modal').css('z-index', '1041');
     });
 });
 </script>
