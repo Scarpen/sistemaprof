@@ -1,0 +1,23 @@
+<div class="modal fade" id="editar<%= pasta.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> Editar nome da pasta: <%= pasta.nome %>  </h4>
+      </div>
+      <div class="well">
+        <%= form_tag(editar_pasta_path) do |f| %>
+
+          <%= label_tag :nome %>
+          <%= text_field_tag :n %>
+
+          <%= hidden_field_tag(:id, pasta.id) %>
+
+          <%= submit_tag 'Enviar' %>
+
+        <% end %>
+        </div>
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -34,27 +34,26 @@
 			    <li>
 			    	<legend class="tree-toggler title-header">
 			    	 	<%= p.nome%> 
-			    	 	<%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' }, :class => 'btn btn-default btn-danger' %>
-					 
+			    	 	
+					 	<% if current_user.id == @diciplina.professor.id%>
 					    <div class="btn-group">
    							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-   								Action
+   								Ações
     							<span class="caret"></span>
     						</a>
     						<ul class="dropdown-menu">
-    							<!-- dropdown menu links -->
+    							<li><%= link_to "Enviar", data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
+										<div class="enviar"> Enviar novo arquivo </div>
+								<% end %> </li>
+    							 <li><%= link_to "Editar nome", data: { toggle: "modal", target: "#editar#{p.id}"}, :class=>"link-icon" do%><div class="enviar"> Editar nome </div><% end %> </li>
+    							 <li><%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' }%></li>
+
     						</ul>
     					</div>
+    					<%end%>
     				</legend>
 			    	  
 			    	  	<ul class="nav nav-list tree">
-			    	  			<% if current_user.id == @diciplina.professor.id%>
-				               		<li>
-				               			<p><%= link_to nil, data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
-	   										<button class="btn enviar"> Enviar novo arquivo </button>
-										<% end %> 
-									</li>
-								<%end%>
 			               		<% p.arquivos.each do |a|%>
 			                      	<li>
 			                               <p><%= link_to a.nome, :action => 'download', :controller => 'arquivos', :meuar => a %>
@@ -71,6 +70,7 @@
 	<% @diciplina.pastas.order('lower(nome)').each do |p| %>
 		<div>		
 		    <%= render :partial => "arquivo_pastas", :locals => {:pasta => p }%>
+		    <%= render :partial => "editar_pastas", :locals => {:pasta => p }%>
 	    </div>
 	<% end %> 
 
@@ -81,10 +81,13 @@
 </div>
 <script>
 $(document).ready(function () {
+	
 	$('ul.tree').hide();
     $('legend.tree-toggler').click(function () {
         $(this).parent().children('ul.tree').toggle(500);
+
     });
+
     $('.enviar').click(function (){
     	$('.modal').css('z-index', '1041');
     });

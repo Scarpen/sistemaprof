@@ -19,7 +19,11 @@ Project::Application.routes.draw do
   devise_for :users
   resources :professors
   resources :alunos
-  resources :pasta
+  resources :pasta do
+    collection do
+      post 'editar'
+    end
+  end
   resources :arquivos do
     collection do
       get 'download'
