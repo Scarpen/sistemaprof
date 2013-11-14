@@ -11,4 +11,9 @@ class PastaController < ApplicationController
 		else
 		end
 	end
+	def editar
+    	@pasta = Pasta.find(params[:id])
+    	@pasta.update_attributes(:nome => params[:n])
+    	redirect_to action: 'materiais', controller: 'diciplinas', id: @pasta.diciplina_id
+  	end
 end

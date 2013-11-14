@@ -12,7 +12,7 @@
   <dt><strong><%= model_class.human_attribute_name(:conteudo) %>:</strong></dt>
   <dd><%= @diciplina.conteudo %></dd>
   <dt><strong><%= model_class.human_attribute_name(:professor_id) %>:</strong></dt>
-  <dd><%= @professor.nome %></dd>
+  <dd><%= @diciplina.professor.nome %></dd>
   <% if current_user.type?("Aluno")%>
     <dt><b> Situação: </b></dt>
         <% if @diciplina.situacao(current_user) == 0 %>

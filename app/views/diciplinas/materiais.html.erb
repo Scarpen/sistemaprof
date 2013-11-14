@@ -27,6 +27,9 @@
 			               			<p><%= link_to nil, data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
    										<button class="btn enviar"> Enviar novo arquivo </button>
 									<% end %> 
+									<p><%= link_to nil, data: { toggle: "modal", target: "#editar#{p.id}" }, :class=>"link-icon" do %></p>
+   										<button class="btn enviar"> Editar nome </button>
+									<% end %> 
 								</li>
 			               		<% p.arquivos.each do |a|%>
 			                      	<li>
@@ -42,6 +45,7 @@
 	<% @diciplina.pastas.order('lower(nome)').each do |p| %>
 		<div>		
 		    <%= render :partial => "arquivo_pastas", :locals => {:pasta => p }%>
+		    <%= render :partial => "editar_pastas", :locals => {:pasta => p }%>
 	    </div>
 	<% end %> 
 
@@ -52,10 +56,13 @@
 </div>
 <script>
 $(document).ready(function () {
+	$(".tree-toggler").accordion({collapsible: true, active: false});
 	$('ul.tree').hide();
     $('legend.tree-toggler').click(function () {
         $(this).parent().children('ul.tree').toggle(500);
+
     });
+
     $('.enviar').click(function (){
     	$('.modal').css('z-index', '1041');
     });

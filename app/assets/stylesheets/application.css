@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require jquery.ui.all
  */
 .image {
 	background: rgb(252,255,244);

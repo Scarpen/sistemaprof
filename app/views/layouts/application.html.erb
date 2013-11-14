@@ -109,7 +109,9 @@
               <% else %>
 
                 <p>Você ainda não esta logado</br>
-                <%= link_to "login", new_user_session_path, :class => 'btn btn-success btn-default'  %>
+                <%= link_to nil, data: { toggle: "modal", target: "#login" }, :class=>"link-icon" do %>
+                      <button class="btn btn-success btn-default enviar"> login </button>
+                <% end %> 
                 <%= link_to "cadastre-se", new_aluno_path, :class => 'btn btn-primary btn-default'  %></p>
               <%end%>
 
@@ -119,7 +121,7 @@
         </div>
       </div>
     </div>
-
+    <%= render :partial => "/layouts/modal_login" %>
     <div class="container">
         <div class="row">
             <%= bootstrap_flash %>
@@ -133,3 +135,11 @@
 
   </body>
 </html>
+
+<script>
+$(document).ready(function () {
+    $('.enviar').click(function (){
+      $('.modal').css('z-index', '1041');
+    });
+});
+</script>
