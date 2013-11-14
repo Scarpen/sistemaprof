@@ -1,7 +1,9 @@
+
 <%= render 'links' %>
+
 <%- model_class = Diciplina -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1>Diciplina: <%= @diciplina.nome %></h1>
 </div>
 
 <dl class="dl-horizontal">

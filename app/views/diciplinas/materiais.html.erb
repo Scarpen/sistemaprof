@@ -1,10 +1,5 @@
-
-
 <div>
-
 	<%= render 'links' %>
-
-	<br>
 	<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
 
 
@@ -44,10 +39,10 @@
 			<% end %>
 		</ul>
 	<% @diciplina.pastas.order('lower(nome)').each do |p| %>
-			<div>		
-			    <%= render :partial => "arquivo_pastas", :locals => {:pasta => p }%>
-			    </div>
-		<% end %> 
+		<div>		
+		    <%= render :partial => "arquivo_pastas", :locals => {:pasta => p }%>
+	    </div>
+	<% end %> 
 
 	<% else %>
 		Você não tem acesso à esse material. </p>

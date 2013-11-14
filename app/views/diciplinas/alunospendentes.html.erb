@@ -15,6 +15,7 @@
 				       <p>Matricula:<%= a.matricula %></p>
 				        <%= image_tag a.avatar_url %> 
 				        <ul>
+				        </br>
 							<%= link_to 'Aceitar',  {:action => 'aceitar', :controller => 'diciplinas', :aluno => a.id,:diciplina => @diciplina.id} , :class => 'btn btn-success btn-small' %>
 							<%= link_to 'Recusar',  {:action => 'recusar', :controller => 'diciplinas', :aluno => a.id,         :diciplina => @diciplina.id}, :class => 'btn btn-danger btn-small'%>
 						</ul>
