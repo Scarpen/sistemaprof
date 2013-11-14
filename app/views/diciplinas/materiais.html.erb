@@ -1,5 +1,18 @@
 <div>
-	<%= render 'links' %>
+	<div align="center">
+	<div class="tabbable"> <!-- Only required for left/right tabs -->
+	    <ul class="nav nav-tabs">
+		    <li><%=link_to 'Inicio', diciplina_path%></li>
+		    <% if current_user.id == @diciplina.professor.id%>
+				<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+			<% end %>
+			<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+			<li class="active"><%=link_to 'Materiais', materiais_path%></li>
+		</ul>
+	</div>			
+	</div>
+
+
 	<div class="tab-pane active" id="tab1">
 	<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
 
@@ -19,19 +32,35 @@
 		<ul class="nav nav-list">
 			<% @diciplina.pastas.order('lower(nome)').each do |p| %>
 			    <li>
-			    	 <legend class="tree-toggler title-header"> <%= p.nome%> </legend>
-			    	  <p align =right><%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' } %></p>
-
+			    	<legend class="tree-toggler title-header">
+			    	 	<%= p.nome%> 
+			    	 	<%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' }, :class => 'btn btn-default btn-danger' %>
+					 
+					    <div class="btn-group">
+   							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+   								Action
+    							<span class="caret"></span>
+    						</a>
+    						<ul class="dropdown-menu">
+    							<!-- dropdown menu links -->
+    						</ul>
+    					</div>
+    				</legend>
+			    	  
 			    	  	<ul class="nav nav-list tree">
-			               		<li>
-			               			<p><%= link_to nil, data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
-   										<button class="btn enviar"> Enviar novo arquivo </button>
-									<% end %> 
-								</li>
+			    	  			<% if current_user.id == @diciplina.professor.id%>
+				               		<li>
+				               			<p><%= link_to nil, data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
+	   										<button class="btn enviar"> Enviar novo arquivo </button>
+										<% end %> 
+									</li>
+								<%end%>
 			               		<% p.arquivos.each do |a|%>
 			                      	<li>
 			                               <p><%= link_to a.nome, :action => 'download', :controller => 'arquivos', :meuar => a %>
-			                               <%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' } %></p>
+			                               <% if current_user.id == @diciplina.professor.id%>
+			                               		<%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' } %></p>
+			                               <%end%>
 			                        </li> 
 			                    <% end %>   
 			            </ul>

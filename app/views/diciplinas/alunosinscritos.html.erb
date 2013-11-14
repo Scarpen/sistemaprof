@@ -1,4 +1,15 @@
-<%= render 'links' %>
+<div align="center">
+	<div class="tabbable"> <!-- Only required for left/right tabs -->
+	    <ul class="nav nav-tabs">
+		    <li><%=link_to 'Inicio', diciplina_path%></li>
+			<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+			<li class="active"><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+			<li><%=link_to 'Materiais', materiais_path%></li>
+		</ul>
+	</div>			
+</div>
+
+
 <div class="tab-pane active" id="tab1">
 <% if @diciplina.professor?(current_user) %>
 	<h1> Alunos Inscritos </h1>
@@ -14,7 +25,7 @@
 				        <%= image_tag a.avatar_url %> 
 				        <ul>
 				        </br>
-							<%= link_to 'Desagregar',  {:action => 'recusar', :controller => 'diciplinas', :aluno => a.id, :diciplina => @diciplina.id},:class => 'btn btn-small btn-danger' %>
+							<%= link_to 'Remover',  {:action => 'recusar', :controller => 'diciplinas', :aluno => a.id, :diciplina => @diciplina.id},:class => 'btn btn-small btn-danger' %>
 						</ul>
 							 
 				      </div>

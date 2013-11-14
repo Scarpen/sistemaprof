@@ -1,5 +1,21 @@
+  
+<div align="center">
+  <div class="tabbable"> <!-- Only required for left/right tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><%=link_to 'Inicio', diciplina_path%></li>
+        <% if current_user.id == @diciplina.professor.id%>
+          <li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+          <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+        <% end %>
+        <li><%=link_to 'Materiais', materiais_path%></li>
+    </ul>
+  </div>      
+</div>
 
-<%= render 'links' %>
+
+
+
+
 <div class="tab-pane active" id="tab1">
 <%- model_class = Diciplina -%>
 <div class="page-header">

@@ -39,3 +39,6 @@
 li{
 	list-style: none;
 }
+.link-a a {
+	text-align: float;
+}
