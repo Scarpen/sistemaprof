@@ -1,18 +1,25 @@
-<div align="center">
+	
+	<div align="center">
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 	    <ul class="nav nav-tabs">
 		    <li><%=link_to 'Inicio', diciplina_path%></li>
-			<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+		    <% if current_user.id == @diciplina.professor.id%>
+				<% if @diciplina.pendentes.count > 0 %>
+		    		<li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
+		    	<%else%>
+					<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+				<%end%>
+			<% end %>
 			<li class="active"><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
 			<li><%=link_to 'Materiais', materiais_path%></li>
 		</ul>
 	</div>			
-</div>
+	</div>
 
 
 <div class="tab-pane active" id="tab1">
 <% if @diciplina.professor?(current_user) %>
-	<h1> Alunos Inscritos </h1>
+	<h1> Alunos Inscritos <span class="badge badge-info">Total : <%=@diciplina.inscritos.count%></span></h1>
 	<div class="row-fluid">
 		<% @diciplina.inscritos.each do |a| %>
 			<div class="span2">

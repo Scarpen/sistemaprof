@@ -4,7 +4,11 @@
 	    <ul class="nav nav-tabs">
 		    <li><%=link_to 'Inicio', diciplina_path%></li>
 		    <% if current_user.id == @diciplina.professor.id%>
-				<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+		    	<% if @diciplina.pendentes.count > 0 %>
+		    		<li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
+		    	<%else%>
+					<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+				<%end%>
 			<% end %>
 			<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
 			<li class="active"><%=link_to 'Materiais', materiais_path%></li>
@@ -21,10 +25,11 @@
 			<div class="field">
 				<%= form_tag(createpasta_path) do %>
 					<p>Criar nova pasta:
-    				<% label_tag :nome %>
-    				<%= text_field_tag :nome %>
-    				
-   					<%= submit_tag 'Criar' %></p>
+					<div class="input-append">
+						<% label_tag :nome %>
+    					<%= text_field_tag :nome %>
+    					<%= submit_tag 'Criar', :class => 'btn' %></p>
+   					</div>
    				<%end%>
   			</div>
 		<% end %>
@@ -32,11 +37,11 @@
 		<ul class="nav nav-list">
 			<% @diciplina.pastas.order('lower(nome)').each do |p| %>
 			    <li>
-			    	<legend class="tree-toggler title-header">
+			    	<legend class="tree-toggler title-header form-actions">
 			    	 	<%= p.nome%> 
-			    	 	
-					 	<% if current_user.id == @diciplina.professor.id%>
-					    <div class="btn-group">
+
+				 	<% if current_user.id == @diciplina.professor.id%>
+					    <div class="btn-group" align='right'>
    							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
    								Ações
     							<span class="caret"></span>
@@ -45,24 +50,27 @@
     							<li><%= link_to "Enviar", data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
 										<div class="enviar"> Enviar novo arquivo </div>
 								<% end %> </li>
-    							 <li><%= link_to "Editar nome", data: { toggle: "modal", target: "#editar#{p.id}"}, :class=>"link-icon" do%><div class="enviar"> Editar nome </div><% end %> </li>
+    							 <li><%= link_to "Editar nome", data: { toggle: "modal", target: "#editar#{p.id}"}, :class=>"link-icon" do%><div class="enviar"> Editar pasta </div><% end %> </li>
+    							 <li class="divider"></li>
     							 <li><%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' }%></li>
-
     						</ul>
     					</div>
-    					<%end%>
-    				</legend>
+					<%end%>
+					</legend>
+
+    				
 			    	  
-			    	  	<ul class="nav nav-list tree">
-			               		<% p.arquivos.each do |a|%>
-			                      	<li>
-			                               <p><%= link_to a.nome, :action => 'download', :controller => 'arquivos', :meuar => a %>
-			                               <% if current_user.id == @diciplina.professor.id%>
-			                               		<%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' } %></p>
-			                               <%end%>
-			                        </li> 
-			                    <% end %>   
-			            </ul>
+		    	  	<ul class="nav nav-list tree">
+		               		<% p.arquivos.each do |a|%>
+		                      	<li>
+		                      		<p><%= a.nome %>
+		                               <%= link_to "download", {:action => 'download', :controller => 'arquivos', :meuar => a} ,:class => 'btn btn-mini btn-primary' %>
+		                               <% if current_user.id == @diciplina.professor.id%>
+		                               		<%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' },:class => 'btn btn-mini btn-danger' %></p>
+		                               <%end%>
+		                        </li> 
+		                    <% end %>   
+		            </ul>
 			   </li>
 			   <br>
 			<% end %>

@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+
+#Geral {
+	width: 800px;
+	margin: 0 auto;
+}
+#logocesupa {
+	width: 800px;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#corpo {
+	width: 800px;
+	float: left;
+	height: 313px;
+	background: url(img/saber.jpg) no-repeat;
+}
+#menu {
+	width: 116px;
+	height: 172px;
+	background: #9f3c00;
+	float: left;
+	margin-left: 45px;
+	_margin-left: 23px;
+	margin-top: 126px;
+	list-style-position:outside;
+}
+#menu li a {
+	color: #fff;
+	width: 116px;
+	font-family: "Trebuchet MS";
+	font-size: 12px;
+}
+#menu li {
+	list-style: none;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 6px;
+}
+#menu li:hover {
+	background: #d95000;
+	width: 110px;
+}
+
+#conteudo {
+	width: 600px;
+	float: left;
+	margin-left: 26px;
+	font-family: "Trebuchet MS";
+	font-size: 14px;
+	*margin-top:20px;
+}
+#conteudo h1 {
+	color: #333;
+	font-weight: 100;
+}
+#controla_conteudo {
+	width: 800px;
+	float: left;
+	padding-top: 190px;
+}
+#rodape {
+	width: 800px;
+	height: 107px;
+	background: url(img/rodape.jpg) no-repeat;
+	float: left;
+	color: #fff;
+	text-align:center;
+}
+
+.rodape_revista{ padding-top:60px; padding-left:158px;}
+
+#rodape2 {
+	width: 798px;
+	height: 60px;
+	color: #000;
+	float: left;
+}
+.textorodape {
+	font-family: "Trebuchet MS";
+	font-size: 12px;
+	color: #666;
+	margin-top: 20px;
+	text-align:center;
+}
+
+#tabela{
+	float:left;
+	width:100%;
+}
+
+.fundotopo {
+	background:url(img/tabela_topo.gif) no-repeat;
+	width:608px;
+	height:31px;
+	color:#FFFFFF;
+	font-family:"Trebuchet MS";
+	margin-bottom:0px;
+}
+
+.titulo1{
+	float:left;
+	width:85%;
+	padding-left:2%;
+	padding-top:8px;
+}
+
+.titulo2{
+	float:left;
+	width:13%;
+	padding-top:8px;
+}
+
+
+.lateraltabela {
+	float:left;
+	background:url(img/tabela_lateral_2.gif) repeat-y;
+	width:608px;
+}
+
+
+.rodapetabela {
+	float:left;
+	width:608px;
+	height:39px;
+	color:#FFFFFF;
+	font-family:"Trebuchet MS";
+}
+
+ul{
+	font-weight:bold;
+}
+
+li{
+	font-weight:normal;
+	list-style-type:none;
+}
+
+.titulo2 a img{
+	float:left;
+	margin-top:30px;
+	margin-left:20px;
+}
+
+.linha:hover{
+	float:left;
+	width:599px;
+	background:#9F3C00;
+	color:#FFFFFF;
+}
+
+a{text-decoration:none;}
