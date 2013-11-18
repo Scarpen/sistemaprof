@@ -26,11 +26,12 @@
 	width: content!;
 	height: 60px;
 }
-.image p{
+.image table tr td{
 	text-shadow: 2px 2px 1px #000000;
     filter: dropshadow(color=#000000, offx=2, offy=2);
 	color: #ffffff;
 	margin-right: 10px;
+	text-align: center;
 }
 .image td img{
 	margin-top: 5px;
@@ -39,6 +40,10 @@
 li{
 	list-style: none;
 }
-.link-a a {
-	text-align: float;
+
+.nav li{
+	margin-top: 1.8%;
+}
+.container a{
+	margin-top: 0.7%;
 }

@@ -24,11 +24,11 @@
 		<% if @diciplina.professor?(current_user) %>
 			<div class="field">
 				<%= form_tag(createpasta_path) do %>
-					<p>Criar nova pasta:
+					<p>Criar nova pasta:</p>
 					<div class="input-append">
 						<% label_tag :nome %>
-    					<%= text_field_tag :nome %>
-    					<%= submit_tag 'Criar', :class => 'btn' %></p>
+    					<%= text_field_tag :nome%>
+    					<%= submit_tag 'Criar', :class => 'btn btn-default btn-default'%>
    					</div>
    				<%end%>
   			</div>
@@ -61,18 +61,24 @@
     				
 			    	  
 		    	  	<ul class="nav nav-list tree">
-		               		<% p.arquivos.each do |a|%>
-		                      	<li>
-		                      		<p><%= a.nome %>
-		                               <%= link_to "download", {:action => 'download', :controller => 'arquivos', :meuar => a} ,:class => 'btn btn-mini btn-primary' %>
-		                               <% if current_user.id == @diciplina.professor.id%>
-		                               		<%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' },:class => 'btn btn-mini btn-danger' %></p>
-		                               <%end%>
-		                        </li> 
-		                    <% end %>   
+					    <table class="table table-hover ">
+					    	<thead>
+						      <th>Nome</th>
+						      <th>Ação</th>
+							</thead> 
+							<% p.arquivos.each do |a|%>
+								<tbody>
+									<td> <%= a.nome %> </td>
+			            			<td> <%= link_to "download", {:action => 'download', :controller => 'arquivos', :meuar => a} ,:class => 'btn btn-mini btn-primary' %>
+			                               <% if current_user.id == @diciplina.professor.id%>
+			                               		<%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' },:class => 'btn btn-mini btn-danger' %></p>
+			                               <%end%>
+			                        </td>
+								</tbody>
+							<% end %>
+		    			</table>     	
 		            </ul>
 			   </li>
-			   <br>
 			<% end %>
 		</ul>
 	<% @diciplina.pastas.order('lower(nome)').each do |p| %>

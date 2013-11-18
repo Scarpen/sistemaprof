@@ -49,91 +49,87 @@
           <%= link_to "Project", root_path, :class => 'brand'%> 
           <div class="container nav-collapse">
             <ul class="nav">
+
               <% if current_user %>
-              <% if current_user.type?("Admin") %>
-              <li><%= link_to "Cadastrar Professor", new_professor_path %></li>
-              <li><%= link_to "Todas as Diciplinas", diciplinas_path %></li>
-              <li><%= link_to 'Todos os Alunos', alunos_path %></li>
-              <li><%= link_to 'Todos os Professores', professors_path %></li>
-              <% end %>
-              <% if current_user.type?("Professor") %>
-              <li><%= link_to "Diciplinas", diciplinas_path %></li>
-              <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
-              <li><%= link_to "Nova Diciplina", new_diciplina_path %></li>
-              <li><%= link_to 'Todos os Alunos', alunos_path %></li>
-              <% end %>
-               <% if current_user.type?("Aluno") %>
-              <li><%= link_to "Diciplinas", diciplinas_path %></li>
-              <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
-              <% end %>
+                <% if current_user.type?("Admin") %>
+                  <li><%= link_to "Cadastrar Professor", new_professor_path %></li>
+                  <li><%= link_to "Todas as Diciplinas", diciplinas_path %></li>
+                  <li><%= link_to 'Todos os Alunos', alunos_path %></li>
+                  <li><%= link_to 'Todos os Professores', professors_path %></li>
+                <% end %>
+                <% if current_user.type?("Professor") %>
+                  <li><%= link_to "Diciplinas", diciplinas_path %></li>
+                  <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
+                  <li><%= link_to "Nova Diciplina", new_diciplina_path %></li>
+                  <li><%= link_to 'Todos os Alunos', alunos_path %></li>
+                <% end %>
+                <% if current_user.type?("Aluno") %>
+                  <li><%= link_to "Diciplinas", diciplinas_path %></li>
+                  <li><%= link_to "Minhas Diciplinas", atuais_diciplinas_path %></li>
+                <% end %>
               <% else %>
-              <li><%= link_to "Cadastre-se", new_aluno_path %></li>
+                <li><%= link_to "Cadastre-se", new_aluno_path %></li>
               <%end%>
-
-
 
             </ul>
             <div align="right" class="image">
             
               <% if current_user %>
-
-              <table border="0">
-                <tr>
-                <td>
-                  <p><% if current_user.type?("Professor") %>
-                  <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
-                  <% end %>
-                   <% if current_user.type?("Aluno") %>
-                   <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
-                  <% end %></p>
-                </td>
-                <td>
-                  <div class="btn-group">
-                    <%= link_to current_user.email, professor_path(current_user.id), :class => "btn btn-primary" %>
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#"><i class="icon-user"></i> Perfil </a></li>
-                      <li><a href="#"><i class="icon-pencil"></i> Editar </a></li>
-                      <li class="divider"></li>
-                      <li><a href="#"><i class="i"></i> Logout </a></li>
-                    </ul>
-                  </div>
-                </td>
-                <td>
-                 <%= link_to('Logout', destroy_user_session_path, method: 'delete',:class => 'btn btn-danger btn-default' ) %>    
-                 </td>  
-                </tr>
-              </table>
+                <table border="0">
+                  <tr>
+                    <% if current_user.type?("Professor") %>
+                      <td>
+                        <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
+                      </td>
+                      <td>
+                        <a class = "btn btn-primary" href="/professors/<%=current_user.id%>"><div class ='icon-user'> <%= current_user.email %> </div></a>
+                      </td>
+                    <% end %>
+                    <% if current_user.type?("Aluno") %>
+                      <td>
+                        <%= image_tag(current_user.avatar_url) if current_user.avatar? %> 
+                      </td> 
+                      <td>
+                        <a class = "btn btn-primary" href="/alunos/<%=current_user.id%>"><div class ='icon-user'> <%= current_user.email %> </div></a>
+                      </td>
+                    <% end %>
+                    <td>
+                      <%= link_to('Logout', destroy_user_session_path, method: 'delete',:class => 'btn btn-danger btn-default' ) %>    
+                    </td>  
+                  </tr>
+                </table>
 
               <% else %>
+                <table> 
+                  <tr>
+                    <td>Você ainda não esta logado<td>
+                  </tr>
 
-                <p>Você ainda não esta logado</br>
-                <%= link_to nil, data: { toggle: "modal", target: "#login" }, :class=>"link-icon" do %>
-                      <button class="btn btn-success btn-default enviar"> login </button>
-                <% end %> 
-                <%= link_to "cadastre-se", new_aluno_path, :class => 'btn btn-primary btn-default'  %></p>
+                  <tr>
+                    <td>
+                      <%= link_to nil, data: { toggle: "modal", target: "#login" }, :class=>"link-icon" do %>
+                        <button class="btn btn-success btn-default enviar"> login </button>
+                      <% end %> 
+                      <%= link_to "cadastre-se", new_aluno_path, :class => 'btn btn-primary btn-default'  %>
+                    </td>
+                  </tr>
+                </table>
               <%end%>
-
             </div><!--end div image-->
-
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
     <%= render :partial => "/layouts/modal_login" %>
     <div class="container">
-        <div class="row">
-            <%= bootstrap_flash %>
-            <%= yield %>
-         
-        </div><!--/row-->
-
-
-
+      <div class="row">
+          <%= bootstrap_flash %>
+          <%= yield %>         
+      </div><!--/row-->
     </div> <!-- /container -->
-
   </body>
 </html>
+
 
 <script>
 $(document).ready(function () {

@@ -1,24 +1,29 @@
-<h2> ID do Usuario: <%= @professor.id %> </h2>
-
-<div>
-<ul>
-    <li> Nome: <%= @professor.nome %> </li>
-    <li> Email: <%= @professor.email %> </li>
-    <li> Endereço: <%= @professor.endereco %> </li>
-    <li> Telefone: <%= @professor.telefone %> </li>
-    <li> CPF: <%= @professor.cpf %> </li>
-    <li> <%= image_tag(@professor.avatar_url) if @professor.avatar? %> </li>
-
-
-</ul>
+<h2> Nome : <%= @professor.nome %> </h2>
+<div class="span2">
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <%= image_tag(@professor.avatar_url) if @professor.avatar? %>
+            </div>
+        </div>
+    </div>
 </div>
-
+<div class="span5">
+    <div>
+    <ul>
+        </br>
+        </br>
+        <li><b> Email:</b> <%= @professor.email %> </li>
+        <li><b> Endereço:</b> <%= @professor.endereco %> </li>
+        <li><b> Telefone:</b> <%= @professor.telefone %> </li>
+        <li><b> CPF:</b> <%= @professor.cpf %> </li>
+        </br>
+    </ul>
+    </div>
     <%= link_to edit_professor_path do %>
-    <button class="btn">Editar Professor</button>
+        <button class="btn btn-small">Editar Conta</button>
     <% end %>
     <%= link_to @professor, method: :delete, data: {confirm: 'Tem certeza?'} do %>
-    <button class="btn btn-danger">Apagar Professor</button>
+        <button class="btn btn-small btn-danger">Deletar Conta</button>
     <% end %>
-    <%= link_to professors_path do%>
-    <button class="btn">Voltar</button>
-<% end %>
+</div>

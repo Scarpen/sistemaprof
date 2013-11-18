@@ -1,20 +1,29 @@
-<h2> ID do Usuario: <%= @aluno.id %> </h2>
-<div>
-    <ul>
-    	<li> Nome: <%= @aluno.nome %> </li>
-    	<li> Email: <%= @aluno.email %> </li>
-        <li> Endereço: <%= @aluno.endereco %> </li>
-        <li> Telefone: <%= @aluno.telefone %> </li>
-        <li> Matricula: <%= @aluno.matricula %> </li>
-        <li> <%= image_tag(@aluno.avatar_url) if @aluno.avatar? %> </li>
-    </ul>
+<h2> Nome : <%= @aluno.nome %> </h2>
+<div class="span2">
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <%= image_tag(@aluno.avatar_url) if @aluno.avatar? %>
+            </div>
+        </div>
+    </div>
 </div>
-<%= link_to edit_aluno_path do %>
-    <button class="btn">Editar Aluno</button>
-<% end %>
-<%= link_to @aluno, method: :delete, data: {confirm: 'Tem certeza?'} do %>
-    <button class="btn btn-danger">Apagar Aluno</button>
-<% end %>
-    <%= link_to alunos_path do%>
-<button class="btn">Voltar</button>
+<div class="span5">
+    <div>
+    <ul>
+        </br>
+        </br>
+        <li><b> Email:</b> <%= @aluno.email %> </li>
+        <li><b> Endereço:</b> <%= @aluno.endereco %> </li>
+        <li><b> Telefone:</b> <%= @aluno.telefone %> </li>
+        <li><b> Matricula:</b> <%= @aluno.matricula %> </li>
+    </ul>
+    </div>
+    <%= link_to edit_aluno_path do %>
+        <button class="btn btn-small">Editar Conta</button>
     <% end %>
+    <%= link_to @aluno, method: :delete, data: {confirm: 'Tem certeza?'} do %>
+        <button class="btn btn-small btn-danger">Deletar Conta</button>
+    <% end %>
+</div>
+        

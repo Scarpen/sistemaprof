@@ -1,4 +1,5 @@
 class AlunosController < ApplicationController
+	load_and_authorize_resource
 	def index
 		@aluno = Aluno.all
 	end
