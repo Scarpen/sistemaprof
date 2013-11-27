@@ -1,8 +1,11 @@
 <div>
+<div>
+  <h3><%= link_to 'Diciplina', diciplinas_path %> > <%= @diciplina.nome %></h3>
+</div>
 	<div align="center">
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 	    <ul class="nav nav-tabs">
-		    <li><%=link_to 'Inicio', diciplina_path%></li>
+			<li class="active"><%=link_to 'Materiais', materiais_path%></li> 
 		    <% if current_user.id == @diciplina.professor.id%>
 		    	<% if @diciplina.pendentes.count > 0 %>
 		    		<li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
@@ -11,20 +14,19 @@
 				<%end%>
 			<% end %>
 			<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
-			<li class="active"><%=link_to 'Materiais', materiais_path%></li>
+			<li><%=link_to 'Sobre', diciplina_path%></li>
 		</ul>
 	</div>			
 	</div>
-
 
 	<div class="tab-pane active" id="tab1">
 	<% if @diciplina.professor?(current_user) || @diciplina.situacao(current_user) == 2 %>
 
 
 		<% if @diciplina.professor?(current_user) %>
-			<div class="field">
+			<div align="center" class="field">
 				<%= form_tag(createpasta_path) do %>
-					<p>Criar nova pasta:</p>
+					<h4>Criar nova pasta:</h4>
 					<div class="input-append">
 						<% label_tag :nome %>
     					<%= text_field_tag :nome%>
@@ -37,30 +39,25 @@
 		<ul class="nav nav-list">
 			<% @diciplina.pastas.order('lower(nome)').each do |p| %>
 			    <li>
-			    	<legend class="tree-toggler title-header form-actions">
-			    	 	<%= p.nome%> 
-
-				 	<% if current_user.id == @diciplina.professor.id%>
-					    <div class="btn-group" align='right'>
-   							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-   								Ações
-    							<span class="caret"></span>
-    						</a>
-    						<ul class="dropdown-menu">
-    							<li><%= link_to "Enviar", data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
-										<div class="enviar"> Enviar novo arquivo </div>
-								<% end %> </li>
-    							 <li><%= link_to "Editar nome", data: { toggle: "modal", target: "#editar#{p.id}"}, :class=>"link-icon" do%><div class="enviar"> Editar pasta </div><% end %> </li>
-    							 <li class="divider"></li>
-    							 <li><%= link_to 'Apagar', p, method: :delete, data: { confirm: 'Tem certeza?' }%></li>
-    						</ul>
-    					</div>
-					<%end%>
-					</legend>
-
-    				
-			    	  
+					<legend class = "tree-toggler title-header form-actions" >
+			    	 		<p class = "icon-folder-close">  <%= p.nome%></p>
+			    		</legend>				    	  
 		    	  	<ul class="nav nav-list tree">
+		    	  		<div>
+		    	  			<% if current_user.id == @diciplina.professor.id%>
+			    	  			<div class="enviar title-header form-actions">
+
+			    	  			<%= link_to "Enviar", data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"btn btn-default btn-primary	" do %>
+			    	  				<div class ='icon-plus'> Enviar arquivo </div>				  
+									<% end %>
+
+								<%= link_to "Editar nome", data: { toggle: "modal", target: "#editar#{p.id}"}, :class=>"btn btn-default btn-default" do%> <div class ='icon-wrench'> Editar pasta </div><% end %>
+
+			    	  			<%= link_to 'Apagar pasta', p, method: :delete, data: { confirm: 'Tem certeza?' },:class => "btn btn-default btn-danger"%>
+
+								</div>
+							<%end%>
+						</div>
 					    <table class="table table-hover ">
 					    	<thead>
 						      <th>Nome</th>

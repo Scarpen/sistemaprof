@@ -1,58 +1,61 @@
-  <div align="center">
+<div>
+  <h3><%= link_to 'Diciplina', diciplinas_path %> > <%= @diciplina.nome %></h3>
+</div>
+<div align="center">
   <div class="tabbable"> <!-- Only required for left/right tabs -->
-      <ul class="nav nav-tabs">
-        <li class="active"><%=link_to 'Inicio', diciplina_path%></li>
-        <% if current_user.id == @diciplina.professor.id%>
-          <% if @diciplina.pendentes.count > 0 %>
-              <li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
-            <%else%>
-             <li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
-          <%end%>
+    <ul class="nav nav-tabs">
+      <li><%=link_to 'Materiais', materiais_path%></li> 
+
+      <% if current_user.id == @diciplina.professor.id%>
+        <% if @diciplina.pendentes.count > 0 %>
+          <li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
+        <%else%>
+          <li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+        <%end%>
       <% end %>
+
       <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
-      <li><%=link_to 'Materiais', materiais_path%></li>
+
+      <li class="active"><%=link_to 'Sobre', diciplina_path%></li>
     </ul>
-  </div>      
   </div>
+</div>
 
 
 
 
 <div class="tab-pane active" id="tab1">
-<%- model_class = Diciplina -%>
-<div class="page-header">
-  <h1>Diciplina: <%= @diciplina.nome %></h1>
-</div>
+  <%- model_class = Diciplina -%>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
-  <dd><%= @diciplina.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:conteudo) %>:</strong></dt>
-  <dd><%= @diciplina.conteudo %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:professor_id) %>:</strong></dt>
-  <dd><%= @diciplina.professor.nome %></dd>
-  <% if current_user.type?("Aluno")%>
-    <dt><b> Situação: </b></dt>
-        <% if @diciplina.situacao(current_user) == 0 %>
-                <dd>Você não está cadastrado nessa disciplina, <%= link_to 'Cadastrar', :action => 'cadastro', :controller => 'controles', :user => current_user, :disciplina => @diciplina %></dd>
-        <% elsif @diciplina.situacao(current_user) == 1 %>
-                <dd>Aguardando aprovação do professor responsavel.</dd>
-        <% elsif @diciplina.situacao(current_user) == 2 %>
-                <dd>Você já está cadastrado nessa disciplina. <%= link_to 'Sair', :action => 'recusar', :controller => 'diciplinas', :aluno => current_user.id, :diciplina => @diciplina.id %></dd>
-        <% end %>
-  <%end%>
+  <dl class="dl-horizontal">
+    <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+    <dd><%= @diciplina.nome %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:conteudo) %>:</strong></dt>
+    <dd><%= @diciplina.conteudo %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:professor_id) %>:</strong></dt>
+    <dd><%= @diciplina.professor.nome %></dd>
+    <% if current_user.type?("Aluno")%>
+      <dt><b> Situação: </b></dt>
+          <% if @diciplina.situacao(current_user) == 0 %>
+                  <dd>Você não está cadastrado nessa disciplina, <%= link_to 'Cadastrar', :action => 'cadastro', :controller => 'controles', :user => current_user, :disciplina => @diciplina %></dd>
+          <% elsif @diciplina.situacao(current_user) == 1 %>
+                  <dd>Aguardando aprovação do professor responsavel.</dd>
+          <% elsif @diciplina.situacao(current_user) == 2 %>
+                  <dd>Você já está cadastrado nessa disciplina. <%= link_to 'Sair', :action => 'recusar', :controller => 'diciplinas', :aluno => current_user.id, :diciplina => @diciplina.id %></dd>
+          <% end %>
+    <%end%>
 
-</dl>
+  </dl>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              diciplinas_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_diciplina_path(@diciplina), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              diciplina_path(@diciplina),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+  <div class="form-actions">
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                diciplinas_path, :class => 'btn'  %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_diciplina_path(@diciplina), :class => 'btn' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                diciplina_path(@diciplina),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+  </div>
 </div>

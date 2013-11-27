@@ -9,7 +9,6 @@
       <th>Conteudo</th>
       <th>Professor</th>
       <th>Situação</th>
-      <th>Ação</th>
   <% elsif current_user.type?("Professor") %>
     <tr>
       <th>Nome</th>
@@ -24,7 +23,7 @@
       <% current_user.diciplinasAlunos.each do |c| %>
         <tr>
           <% diciplina = Diciplina.find(c.diciplina_id) %>
-            <td> <%= diciplina.nome %> </td>
+            <td> <%= link_to diciplina.nome, materiais_path(diciplina) %> </td>
             <td> <%= diciplina.conteudo %> </td>
             <td> <%= Professor.find(diciplina.professor_id).nome %> </td>
           <%if c.situacao == 1 %>
@@ -32,7 +31,6 @@
           <%elsif c.situacao == 2 %>
             <td> Inscrição Completa </td> 
           <% end %>
-          <td><%= link_to 'Mostrar', diciplina,:class => 'btn btn-mini btn-default' %></td>
         </tr>
       <% end %>
     <%end%>
@@ -41,9 +39,9 @@
     <% if current_user.type?("Professor")  %>
       <% if diciplina.professor_id == current_user.id %>
         <tr>
-          <td><%= diciplina.nome %></td>
+          <td><%= link_to diciplina.nome, materiais_path(diciplina) %></td>
           <td><%= diciplina.conteudo %></td>
-          <td><%= link_to 'Mostrar', diciplina,:class => 'btn btn-mini btn-default' %>
+          <td>
           <%= link_to 'Editar', edit_diciplina_path(diciplina),:class =>'btn btn-mini btn-primary' %>
           <%= link_to 'Apagar', diciplina, method: :delete, data: { confirm: 'Are you sure?' },:class =>'btn btn-mini btn-danger' %></td>
         </tr>
