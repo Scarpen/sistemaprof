@@ -1,0 +1,103 @@
+body{
+	margin: 10px 100px 10px 100px;
+	text-align: justify;
+	background-color:#ffffff;
+	font-family:arial;
+	font-size:16;
+}
+
+#localizacao{
+	width: 300px;
+	height: 200px;
+}
+
+ul{
+	list-style-type:none;
+	margin-left: -40px;
+	margin-bottom: -2px;
+}
+
+.abas{
+	margin-left: 250px;
+	margin-bottom: 3px;
+}
+
+
+li{
+	text-align: center;
+	padding:2px 5px 2px 5px;
+
+}
+
+.servi li{
+	background: #9a9a9a;
+	border-width: 1;
+	border-color: black;
+	border-style: solid;
+	color:#000000;
+}
+
+#menuinline{
+	width: 100%;
+}
+#menuinline li{
+	display: inline;
+	font-family: DokChampa;
+	font-size:16px;
+	margin-right: 20px;
+	margin-top: -20px;
+
+}
+
+.abas li{
+	display: inline;
+	border-radius: 10px 10px 0px 0px;
+	background: #9a9a9a;
+	margin-right:-5px;
+	border-width: 1;
+	border-color: black;
+	border-style: solid;
+	padding: 10px 20px 5px 20px;
+	color:000000;
+}
+
+#ative{
+	background: #DFDFDF;
+}
+
+a{
+	text-decoration:none;
+	color: #FFFFFF;
+}
+a:hover{
+	text-decoration:none;
+	color: #DDDDDD;
+
+}
+
+
+#logo{
+ 	width: 150px; 
+	height: 150px;
+	padding-right: 10px;
+}
+
+p{
+	text-align:justify;
+	margin:2px 5px 5px 5px; 
+	
+}
+
+h3{
+	margin-top: 5px;
+}
+
+#menu{
+	background-color: #3E4095;
+}
+
+#rodape{
+	background-color: #3E4095;
+	color: #FFFFFF;
+	font-size:12;
+}

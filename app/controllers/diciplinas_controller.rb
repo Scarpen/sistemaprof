@@ -34,6 +34,7 @@ class DiciplinasController < ApplicationController
   def atividades
     @diciplina = Diciplina.find(params[:id])
     @atividade = Atividade.new
+    @exercicio = Exercicio.new
   end
 
   def materiais

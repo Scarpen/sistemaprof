@@ -19,7 +19,7 @@
         <td><%= diciplina.conteudo %></td>
         <td><%= diciplina.professor.nome %></td>
         <td>
-          <% if current_user.id == diciplina.professor.id%>
+          <% if current_user.id == diciplina.professor_id%>
           
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_diciplina_path(diciplina), :class => 'btn btn-mini' %>

@@ -1,0 +1,44 @@
+<div class="modal fade" id="nova_atividade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> Criar uma nova atividade na diciplina: <%= @diciplina.nome %> </h4>
+      </div>
+      <div class="well">
+        <%= form_for @atividade, :url => {:action => "create", :controller => "atividades"} do |f|%>
+
+          <p>Descrição: 
+          <%= f.text_field :descricao %></p>
+          
+          <p> Nota Maxima:
+          <%= f.number_field :nota_maxima %></p>
+          <!-- <%= f.text_field :prazo, :data => {:format => "dd/MM/yyyy hh:mm:ss" }%> -->
+          Prazo: 
+            <div id="datetimepicker1" class="input-append date">
+              <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="atividade[prazo]"></input>
+              <span class="add-on">
+                <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                </i>
+              </span>
+            </div>
+            
+          <%= f.hidden_field :diciplina_id, {:value => @diciplina.id }%>
+          
+          <div class="modal-footer">
+          <%= submit_tag 'Criar' %>
+          </div>
+        <% end %>
+        </div>
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      
+      language: 'pt-BR'
+    });
+  });
+</script>

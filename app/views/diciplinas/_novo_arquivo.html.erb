@@ -1,0 +1,36 @@
+<div class="modal fade" id="atividade<%= atividade.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> "Enviar exercicio: <%= atividade.descricao %>  </h4>
+      </div>
+      <div class="well">
+
+          <p> Descrição</p>
+          <%= atividade.descricao %>
+        <%= form_for(@exercicio) do |f| %>
+
+          <br />
+          <br />
+          <%= f.hidden_field :arquivo_cache %>
+          <%= f.file_field :arquivo %>
+          <br />
+          <br />
+          <%= f.hidden_field :atividade_id, {:value => atividade.id} %>
+          <%= f.hidden_field :aluno_id, {:value => current_user.id} %>
+          <br />
+          <br />
+          <%= f.submit 'Enviar' %>
+
+        <% end %>
+        <div class="well">
+        </div>
+
+
+
+        </div>
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

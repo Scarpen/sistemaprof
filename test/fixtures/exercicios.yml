@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  aluno_id: 1
+  atividade_id: 1
+  nota: 
+  arquivo: MyString
+
+two:
+  aluno_id: 1
+  atividade_id: 1
+  nota: 
+  arquivo: MyString

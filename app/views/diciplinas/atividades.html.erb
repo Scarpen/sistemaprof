@@ -1,0 +1,92 @@
+<div>
+  <div align="center">
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+          
+          <% if current_user.id == @diciplina.professor.id%>
+          <li><%=link_to 'Materiais', materiais_path%></li>
+          <li class="active"><%=link_to 'Atividades', atividades_path%></li>
+          <% if @diciplina.pendentes.count > 0 %>
+              <li ><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
+            <%else%>
+            <li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+          <%end%>
+        <% end %>
+        <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+
+        <li><%=link_to 'Sobre', diciplina_path%></li>
+      </ul>
+    </div>      
+  </div>
+  <% if @diciplina.professor?(current_user) %>
+    <%= render 'nova_atividade' %>
+    <div class="input-append">
+      <li class="criar"><%= link_to "Criar nova atividade", data: { toggle: "modal", target: "#nova_atividade" } do %></p>
+        <div class="btn btn-default btn-default"> Criar nova atividade </div>
+      <% end %>
+    </div>
+  <% end %> 
+
+  <% @diciplina.atividades.each do |p| %>
+    <div>   
+        <%= render :partial => "novo_arquivo", :locals => {:atividade => p }%>
+      </div>
+  <% end %> 
+  <ul>
+    <% @diciplina.atividades.each do |a|%>
+      <li>
+        <legend class = "tree-toggler title-header form-actions" >
+                    <p class = "icon-folder-close">  <%= a.descricao%></p>
+        </legend>
+          <ul class="nav nav-list tree">
+            <div class="enviar title-header form-actions">
+              <div class="criar"> 
+                <%= link_to "Enviar", data: { toggle: "modal", target: "#atividade#{a.id}" }, :class=>"btn btn-default btn-primary  " do %>
+                  <div class ='icon-plus'> Enviar arquivo </div>          
+                <% end %> 
+              </div>
+            </div>
+            <table class="table table-hover">
+                <tr>
+                  <th> Aluno </th>
+                  <th> Nota </th>
+                  <th> Ações </th>
+                </tr>
+              <% a.exercicios.each do |e| %>
+                <tr>
+                  <td> <%= e.aluno.nome %> </td>
+                  <td> 
+                    <% if e.nota == nil %>
+                      a nota ainda não foi atribuida
+                    <% else %>
+                      <%= e.nota %>
+                    <%end%>
+                  </td>
+                  <td> <%= link_to "download", {:action => 'download', :controller => 'exercicios', :meuar => e} ,:class => 'btn btn-mini btn-primary' %>  </td>
+                </tr>
+              <%end%>
+            </table>
+          </ul>
+      <li>
+    <% end %>
+  <ul>
+      
+    
+
+</div>
+<script>
+$(document).ready(function () {
+  
+  $('ul.tree').hide();
+    $('legend.tree-toggler').click(function () {
+        $(this).parent().children('ul.tree').toggle(500);
+
+    });
+
+    $('.criar').click(function (){
+      $('.modal').css('z-index', '1041');
+    });
+
+}); 
+
+</script>

@@ -23,7 +23,7 @@ class Ability
         elsif user.type?("Aluno")
             can :read, [Aluno]
             can :manage, [Aluno],:id => user.id
-        	can [:index, :read, :atuais, :recusar, :materiais], [Diciplina]
+        	can [:index, :read, :atuais, :recusar, :materiais, :atividades], [Diciplina]
             cannot [:create],[Arquivo]
         end
     end

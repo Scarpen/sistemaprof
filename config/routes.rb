@@ -17,8 +17,13 @@ Project::Application.routes.draw do
   match 'diciplinas/:id/createpasta' => 'diciplinas#createpasta', :as => :createpasta, via: :post
   match 'diciplinas/:id/createatividade' => 'diciplinas#createatividade', :as => :createatividade, via: :post
   match 'diciplinas/:id/atividades' => 'diciplinas#atividades', :as => :atividades
+  match 'diciplinas/:id/createarquivo' => 'diciplinas#createarquivo', :as => :createarquivo, via: :post
   resources :atividades
-  resources :exercicios
+  resources :exercicios do
+    collection do
+      get 'download'
+    end
+  end
   devise_for :users
   resources :professors
   resources :alunos

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  diciplina_id: MyString
+  nota_minima: 
+  nota_maxima: 
+
+two:
+  diciplina_id: MyString
+  nota_minima: 
+  nota_maxima: 
