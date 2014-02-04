@@ -2,6 +2,7 @@ class Diciplina < ActiveRecord::Base
 	belongs_to :professor
 	has_and_belongs_to_many :alunos
 	has_many :pastas
+  has_many :atividades
   	attr_accessible :conteudo, :nome, :professor_id, :aluno_ids, :arquivos_ids
   	
   	def professor?(user)

@@ -19,13 +19,17 @@
         <td><%= diciplina.conteudo %></td>
         <td><%= diciplina.professor.nome %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_diciplina_path(diciplina), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      diciplina_path(diciplina),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          <% if current_user.id == diciplina.professor.id%>
+          
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_diciplina_path(diciplina), :class => 'btn btn-mini' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        diciplina_path(diciplina),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>
+          
+          <% end %>
         </td>
       </tr>
     <% end %>

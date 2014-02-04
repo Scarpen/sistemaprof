@@ -31,6 +31,11 @@ class DiciplinasController < ApplicationController
    
   end
 
+  def atividades
+    @diciplina = Diciplina.find(params[:id])
+    @atividade = Atividade.new
+  end
+
   def materiais
     @diciplina = Diciplina.find(params[:id])
     @arquivo = Arquivo.new
@@ -116,4 +121,15 @@ class DiciplinasController < ApplicationController
     @diciplina.recusar(aluno, disciplina)
     redirect_to action: 'show', controller: 'diciplinas', id: disciplina
   end
+
+  def createatividade
+      @atividade = Atividade.new
+      @atividade.descricao = params[:descricao]
+      @atividade.nota_maxima = params[:nota_maxima]
+      @atividade.diciplina_id = params[:diciplina_id]
+    if  @atividade.save
+      redirect_to action: 'atividades', controller: 'diciplinas', id: @atividade.diciplina_id
+    end
+  end
 end
+

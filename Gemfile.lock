@@ -45,6 +45,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datetimepicker-rails (0.0.11)
     builder (3.0.4)
     cancan (1.6.10)
     carrierwave (0.8.0)
@@ -149,6 +150,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bootstrap-datetimepicker-rails
   cancan
   carrierwave
   coffee-rails (~> 3.2.1)

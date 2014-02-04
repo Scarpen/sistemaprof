@@ -7,20 +7,26 @@
       <div class="well">
         <%= form_for(@arquivo) do |f| %>
 
-          <%= f.label :nome %>
+          <p> Descrição</p>
           <%= f.text_field :nome %>
-
-          <%= f.file_field :arquivo %>
+          <br />
+          <br />
           <%= f.hidden_field :arquivo_cache %>
-
-          <%= f.label :pasta_id %><br />
+          <%= f.file_field :arquivo %>
+          <br />
+          <br />
+          <%= f.label :pasta_id %>
           <%= f.text_field :pasta_id, disabled: true, placeholder: pasta.nome %>
 
           <%= f.hidden_field :pasta_id, {:value => pasta.id} %>
-
+          <br />
+          <br />
           <%= f.submit 'Enviar' %>
 
         <% end %>
+
+
+
         </div>
        
       </div>

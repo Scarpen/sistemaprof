@@ -10,8 +10,9 @@
 					<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
 				<%end%>
 			<% end %>
-			<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+			<li><%= link_to 'Alunos Inscritos', alunosinscritos_path%></li>
 			<li class="active"><%=link_to 'Materiais', materiais_path%></li>
+			<li><%= link_to 'Atividades', atividades_path %></li>
 		</ul>
 	</div>			
 	</div>
@@ -47,7 +48,7 @@
     							<span class="caret"></span>
     						</a>
     						<ul class="dropdown-menu">
-    							<li><%= link_to "Enviar", data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
+    							<li class="enviar"><%= link_to "Enviar", data: { toggle: "modal", target: "#pasta#{p.id}" }, :class=>"link-icon" do %></p>
 										<div class="enviar"> Enviar novo arquivo </div>
 								<% end %> </li>
     							 <li><%= link_to "Editar nome", data: { toggle: "modal", target: "#editar#{p.id}"}, :class=>"link-icon" do%><div class="enviar"> Editar pasta </div><% end %> </li>
@@ -63,8 +64,9 @@
 		    	  	<ul class="nav nav-list tree">
 					    <table class="table table-hover ">
 					    	<thead>
-						      <th>Nome</th>
+						      <th>Descrição</th>
 						      <th>Ação</th>
+						      <th>Enviado em</th>
 							</thead> 
 							<% p.arquivos.each do |a|%>
 								<tbody>
@@ -74,6 +76,7 @@
 			                               		<%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' },:class => 'btn btn-mini btn-danger' %></p>
 			                               <%end%>
 			                        </td>
+			                        <td> <%= a.created_at %> </td>
 								</tbody>
 							<% end %>
 		    			</table>     	
@@ -98,12 +101,12 @@ $(document).ready(function () {
 	
 	$('ul.tree').hide();
     $('legend.tree-toggler').click(function () {
-        $(this).parent().children('ul.tree').toggle(500);
+        $(this).parent().children('ul.tree').slideToggle(500);
 
     });
 
     $('.enviar').click(function (){
     	$('.modal').css('z-index', '1041');
     });
-});
+});	
 </script>

@@ -10,8 +10,16 @@ class Ability
         elsif user.type?("Professor")
             can :read, [Aluno]
             can :manage, [Professor],:id => user.id
-            can :manage, [Diciplina]
+            can [:create,:read,:alunosinscritos,:atuais], [Diciplina]
             can :manage, [Arquivo]
+            can [:update,:destroy,:alunospendentes,:materiais,:createpasta,:aceitar,:recusar, :atividades, :createatividade], Diciplina do |diciplina|
+                diciplina.try(:professor_id) == user.id
+            end
+            can [:create], Atividade
+            can [:manage], Atividade do |atividade|
+                diciplina = atividade.diciplina
+                diciplina.try(:professor_id) == user.id
+            end
         elsif user.type?("Aluno")
             can :read, [Aluno]
             can :manage, [Aluno],:id => user.id
