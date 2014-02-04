@@ -1,8 +1,11 @@
-	
+<div>
+  <h3><%= link_to 'Diciplina', diciplinas_path %> > <%= @diciplina.nome %></h3>
+</div>
+
 	<div align="center">
 	<div class="tabbable"> <!-- Only required for left/right tabs -->
 	    <ul class="nav nav-tabs">
-		    <li><%=link_to 'Inicio', diciplina_path%></li>
+		    <li><%=link_to 'Materiais', materiais_path%></li>
 		    <% if current_user.id == @diciplina.professor.id%>
 				<% if @diciplina.pendentes.count > 0 %>
 		    		<li class="active"><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
@@ -11,8 +14,8 @@
 				<%end%>
 			<% end %>
 			<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
-			<li><%=link_to 'Materiais', materiais_path%></li>
-			<li><%= link_to 'Atividades', atividades_path %></li>
+			<li><%=link_to 'Sobre', diciplina_path%></li>
+
 		</ul>
 	</div>			
 	</div>
