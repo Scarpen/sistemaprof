@@ -10,12 +10,14 @@
 		    <% if current_user.id == @diciplina.professor.id%>
 		    	<% if @diciplina.pendentes.count > 0 %>
 		    		<li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
+		    		<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
 		    	<%else%>
 					<li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+					<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
 				<%end%>
 			<% end %>
 			
-			<li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+			
 			<li><%=link_to 'Sobre', diciplina_path%></li>
 
 		</ul>
@@ -32,7 +34,7 @@
 					<h4>Criar nova pasta:</h4>
 					<div class="input-append">
 						<% label_tag :nome %>
-    					<%= text_field_tag :nome%>
+    					<%= text_field_tag :nome, nil, :maxlength => 1, :allow_blank => false, :required => true %>
     					<%= submit_tag 'Criar', :class => 'btn btn-default btn-default'%>
    					</div>
    				<%end%>

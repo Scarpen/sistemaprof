@@ -20,9 +20,8 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-gem "therubyracer"
-gem "less-rails"
-gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "time_diff", "~> 0.3.0"
+gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
 
 group :development do

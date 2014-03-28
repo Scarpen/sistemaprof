@@ -13,4 +13,14 @@ class AtividadesController < ApplicationController
 
 		end
 	end
+
+	def destroy
+		@atividade = Atividade.find(params[:id])
+		id = @atividade.diciplina_id
+		if @atividade.destroy
+			redirect_to action: 'atividades', controller: 'diciplinas', id: id
+		else
+		end
+	end
+
 end

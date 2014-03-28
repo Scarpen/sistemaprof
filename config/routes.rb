@@ -22,6 +22,7 @@ Project::Application.routes.draw do
   resources :exercicios do
     collection do
       get 'download'
+      post 'atribuirnota'
     end
   end
   devise_for :users

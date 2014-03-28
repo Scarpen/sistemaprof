@@ -9,12 +9,14 @@
       <% if current_user.id == @diciplina.professor.id%>
         <% if @diciplina.pendentes.count > 0 %>
           <li><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
+          <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
         <%else%>
           <li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+          <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
         <%end%>
       <% end %>
 
-      <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
+
 
 
       <li class="active"><%=link_to 'Sobre', diciplina_path%></li>
@@ -51,12 +53,14 @@
   <div class="form-actions">
     <%= link_to t('.back', :default => t("helpers.links.back")),
                 diciplinas_path, :class => 'btn'  %>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    <% if current_user.id == @diciplina.professor.id%>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_diciplina_path(@diciplina), :class => 'btn' %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 diciplina_path(@diciplina),
                 :method => 'delete',
                 :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                 :class => 'btn btn-danger' %>
+    <%end%>
   </div>
 </div>

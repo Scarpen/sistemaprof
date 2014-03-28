@@ -1,37 +1,71 @@
 <div>
+  <h3><%= link_to 'Diciplina', diciplinas_path %> > <%= @diciplina.nome %></h3>
+</div>
+<div>
   <div align="center">
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-          
-          <% if current_user.id == @diciplina.professor.id%>
           <li><%=link_to 'Materiais', materiais_path%></li>
           <li class="active"><%=link_to 'Atividades', atividades_path%></li>
+          <% if current_user.id == @diciplina.professor.id%>
           <% if @diciplina.pendentes.count > 0 %>
               <li ><a href="/diciplinas/<%=@diciplina.id%>/alunospendentes">Alunos Pendentes <span class="badge badge-info"><%= @diciplina.pendentes.count %></span></a></li>
             <%else%>
             <li><%=link_to 'Alunos Pendentes', alunospendentes_path%></li>
+            <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
           <%end%>
         <% end %>
-        <li><%=link_to 'Alunos Inscritos', alunosinscritos_path%></li>
-
         <li><%=link_to 'Sobre', diciplina_path%></li>
       </ul>
     </div>      
   </div>
+
+  <% if @diciplina.situacao(current_user) == 2%>
+    <h3> Atividades da Diciplina </h3>
+    <table class="table table-hover">
+      <tr>
+        <th> Descrição </th>
+        <th> Sua situacao </th>
+        <th> Nota Maxima </th>
+        <th> Sua Nota </th>
+        <th> Prazo </th>
+        <th> Enviado em </th>
+        <th> Ações </th>
+      </tr>
+    <% @diciplina.atividades.each do |a| %>
+      <tr>
+        <td> <%= a.descricao %> </td>
+        <td> <%= a.situacao(current_user) %> </td>
+        <td> <%= a.nota_maxima %> </td>
+        <td> <%= a.nota(current_user) %> </td>
+        <td> <%= a.prazo  %> </td>
+        <td> <%= a.envio(current_user)   %> </td>
+        <td> 
+          <div class="criar"> 
+            <%= link_to "Enviar", data: { toggle: "modal", target: "#atividade#{a.id}" }, :class=>"btn btn-mini btn-default btn-primary  " do %>
+              <div class ='icon-plus'> Enviar arquivo </div>       
+            <% end %> 
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  <% end %>
   <% if @diciplina.professor?(current_user) %>
     <%= render 'nova_atividade' %>
-    <div class="input-append">
-      <li class="criar"><%= link_to "Criar nova atividade", data: { toggle: "modal", target: "#nova_atividade" } do %></p>
-        <div class="btn btn-default btn-default"> Criar nova atividade </div>
-      <% end %>
-    </div>
-  <% end %> 
+      <div class="input-append">
+        <li class="criar"><%= link_to "Criar nova atividade", data: { toggle: "modal", target: "#nova_atividade" } do %></p>
+          <div class="btn btn-default btn-default"> Criar nova atividade </div>
+        <% end %>
+      </div>
+    <% end %> 
 
   <% @diciplina.atividades.each do |p| %>
     <div>   
         <%= render :partial => "novo_arquivo", :locals => {:atividade => p }%>
       </div>
   <% end %> 
+  <% if @diciplina.professor?(current_user) %>
   <ul>
     <% @diciplina.atividades.each do |a|%>
       <li>
@@ -42,14 +76,21 @@
             <div class="enviar title-header form-actions">
               <div class="criar"> 
                 <%= link_to "Enviar", data: { toggle: "modal", target: "#atividade#{a.id}" }, :class=>"btn btn-default btn-primary  " do %>
-                  <div class ='icon-plus'> Enviar arquivo </div>          
+                  <div class ='icon-plus'> Enviar arquivo </div>  
+                  <% if current_user.id == @diciplina.professor.id%>
+                    <%= link_to 'Apagar', a, method: :delete, data: { confirm: 'Tem certeza?' },:class => 'btn btn-danger' %></p>
+                    <%end%>        
                 <% end %> 
               </div>
+                <p>Prazo <%= a.prazo  %></p>
+                <p>Nota Maxima <%= a.nota_maxima %></p>
             </div>
             <table class="table table-hover">
                 <tr>
                   <th> Aluno </th>
                   <th> Nota </th>
+                  <th> Data de Envio </th>
+                  <th> Prazo </th>
                   <th> Ações </th>
                 </tr>
               <% a.exercicios.each do |e| %>
@@ -57,10 +98,22 @@
                   <td> <%= e.aluno.nome %> </td>
                   <td> 
                     <% if e.nota == nil %>
-                      a nota ainda não foi atribuida
+                      <%= form_tag(atribuirnota_exercicios_path) do |f| %>
+                        <%= number_field_tag :nota, nil, max: a.nota_maxima, min: 0 %>
+                        <%= hidden_field_tag(:id, e.id) %>
+                        <%= submit_tag 'Enviar' %>
+                        <% end %>
                     <% else %>
                       <%= e.nota %>
                     <%end%>
+                  </td>
+                  <td><%= e.created_at %></td>
+                  <td>
+                    <% if (e.created_at.to_datetime - a.prazo.to_datetime).to_i == 0 %>
+                      <p style="color: green"> A atividade foi entrege dentro do prazo. </p>
+                    <% else %>
+                      <p style="color: red">A atividade foi entrege com <%= (e.created_at.to_datetime - a.prazo.to_datetime).to_i %> dia(s) de atrazo.</p>
+                      <%end%>
                   </td>
                   <td> <%= link_to "download", {:action => 'download', :controller => 'exercicios', :meuar => e} ,:class => 'btn btn-mini btn-primary' %>  </td>
                 </tr>
@@ -70,6 +123,7 @@
       <li>
     <% end %>
   <ul>
+<% end %>
       
     
 
