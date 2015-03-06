@@ -3,7 +3,8 @@ class Ability
 
   def initialize(user)
         if user ||= User.new
-            can :new, [Aluno]
+            can [:new, :create], [Aluno]
+            can :new, User
         end    
         if user.type?("Admin")
         	can :manage, :all
@@ -23,7 +24,7 @@ class Ability
         elsif user.type?("Aluno")
             can :read, [Aluno]
             can :manage, [Aluno],:id => user.id
-        	can [:index, :read, :atuais, :recusar, :materiais, :atividades], [Diciplina]
+        	can [:download, :index, :read, :atuais, :recusar, :materiais, :atividades], [Diciplina]
             cannot [:create],[Arquivo]
         end
     end

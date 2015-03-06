@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125121449) do
+ActiveRecord::Schema.define(:version => 20131120114412) do
 
   create_table "arquivos", :force => true do |t|
     t.integer  "pasta_id"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(:version => 20131125121449) do
   create_table "atividades", :force => true do |t|
     t.string   "diciplina_id"
     t.float    "nota_maxima"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "descricao"
     t.datetime "prazo"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "controles", :force => true do |t|

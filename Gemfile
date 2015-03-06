@@ -22,6 +22,8 @@ group :assets do
 end
 gem "time_diff", "~> 0.3.0"
 gem 'twitter-bootstrap-rails'
+gem "therubyracer"
+gem "less-rails"
 gem 'jquery-rails'
 
 group :development do
